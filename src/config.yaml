@@ -1,0 +1,71 @@
+site:
+  name: SoftMarket Pro
+  site: 'https://softmarketpro.example'
+  base: '/'
+  trailingSlash: false
+
+  googleSiteVerificationId: null
+
+metadata:
+  title:
+    default: SoftMarket Pro
+    template: '%s | SoftMarket Pro'
+  description: 'Tienda online de licencias digitales para Windows, Office, Adobe, Corel, servidores y packs con factura e IVA.'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: SoftMarket Pro
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@softmarketpro'
+    site: '@softmarketpro'
+    cardType: summary_large_image
+
+i18n:
+  language: es
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: true
+    postsPerPage: 6
+
+    post:
+      isEnabled: true
+      permalink: '/%slug%'
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'blog'
+      robots:
+        index: true
+
+    category:
+      isEnabled: true
+      pathname: 'category'
+      robots:
+        index: true
+
+    tag:
+      isEnabled: true
+      pathname: 'tag'
+      robots:
+        index: false
+
+    isRelatedPostsEnabled: true
+    relatedPostsCount: 4
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null
+
+ui:
+  theme: 'system'

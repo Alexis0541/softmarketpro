@@ -1,0 +1,10 @@
+---
+import Page from '../../software/[category].astro';
+import { categorySlugs } from '~/data/software';
+
+export function getStaticPaths() {
+  return categorySlugs.map((category) => ({ params: { category } }));
+}
+---
+
+<Page />

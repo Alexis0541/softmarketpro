@@ -1,0 +1,85 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import ProductGrid from '~/components/widgets/ProductGrid.astro';
+import { categorySlugs, getCategory, getProductsByCategory } from '~/data/software';
+import { getLangFromUrl, localizePath } from '~/utils/i18n';
+
+export function getStaticPaths() {
+  return categorySlugs.map((category) => ({ params: { category } }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const slug = Astro.params.category || '';
+const category = getCategory(slug, lang);
+const categoryProducts = getProductsByCategory(slug, lang);
+
+if (!category) {
+  return Astro.redirect(localizePath('/software', lang));
+}
+
+const copy = {
+  es: {
+    metaSuffix: 'Software recomendado',
+    tag: 'Categoria',
+    titlePrefix: 'Software de',
+    products: 'Ver productos',
+    allCategories: 'Todas las categorias',
+    productsOf: 'Productos de',
+    subtitle: 'Licencias digitales en euros con IVA incluido. Anade al carrito y prepara tu pedido sin salir de la tienda.',
+    faqTitle: 'Preguntas sobre',
+    faqs: [
+      ['Como se elige el producto correcto?', 'Comparando compatibilidad, precio, soporte, numero de dispositivos, tipo de licencia, region de activacion y reputacion del proveedor.'],
+      ['Puedo comprar varias unidades?', 'Si. El carrito permite sumar unidades y preparar pedidos por volumen para empresas, tecnicos o tiendas.'],
+      ['Los precios incluyen IVA?', 'Si. Los precios se muestran en euros con IVA incluido para una tienda orientada a Espana.'],
+    ],
+    back: 'Volver al catalogo',
+    ctaTitle: 'Categoria lista para ampliar',
+    ctaSubtitle: 'El siguiente paso es cargar mas productos reales, filtros, cupones y pasarela de pago.',
+  },
+  en: {
+    metaSuffix: 'Recommended software',
+    tag: 'Category',
+    titlePrefix: 'Software for',
+    products: 'View products',
+    allCategories: 'All categories',
+    productsOf: 'Products for',
+    subtitle: 'Digital licenses in euros with VAT included. Add to cart and prepare your order without leaving the store.',
+    faqTitle: 'Questions about',
+    faqs: [
+      ['How do I choose the right product?', 'Compare compatibility, price, support, number of devices, license type, activation region and supplier reputation.'],
+      ['Can I buy several units?', 'Yes. The cart lets you add units and prepare volume orders for businesses, technicians or stores.'],
+      ['Do prices include VAT?', 'Yes. Prices are shown in euros with VAT included for a Spain-focused store.'],
+    ],
+    back: 'Back to catalog',
+    ctaTitle: 'Category ready to expand',
+    ctaSubtitle: 'The next step is adding more real products, filters, coupons and a payment gateway.',
+  },
+}[lang];
+
+const metadata = {
+  title: `${category.name} | ${copy.metaSuffix}`,
+  description: category.description,
+};
+---
+
+<Layout metadata={metadata} lang={lang}>
+  <HeroText
+    tagline={copy.tag}
+    title={`${copy.titlePrefix} ${category.name}`}
+    subtitle={category.description}
+    callToAction={{ text: copy.products, href: '#productos', icon: 'tabler:shopping-bag' }}
+    callToAction2={{ text: copy.allCategories, href: localizePath('/software', lang), icon: 'tabler:grid-dots' }}
+  />
+
+  <ProductGrid id="productos" title={`${copy.productsOf} ${category.name}`} subtitle={copy.subtitle} products={categoryProducts} lang={lang} />
+
+  <FAQs title={`${copy.faqTitle} ${category.name}`} items={copy.faqs.map(([title, description]) => ({ title, description }))} />
+
+  <CallToAction actions={[{ variant: 'primary', text: copy.back, href: localizePath('/software', lang), icon: 'tabler:arrow-left' }]}>
+    <Fragment slot="title">{copy.ctaTitle}</Fragment>
+    <Fragment slot="subtitle">{copy.ctaSubtitle}</Fragment>
+  </CallToAction>
+</Layout>
