@@ -1,5 +1,11 @@
 import type { Lang } from '~/utils/i18n';
 import { ui } from '~/utils/i18n';
+import { SITE } from 'storefront:config';
+
+const asset = (path: string) => {
+  const base = SITE.base && SITE.base !== '/' ? SITE.base : import.meta.env.BASE_URL || '/';
+  return `${base.endsWith('/') ? base : `${base}/`}${path.replace(/^\//, '')}`;
+};
 
 const categorySource = [
   {
@@ -65,7 +71,7 @@ const productSource = [
     name: { es: 'Microsoft Office 2024 Professional Plus', en: 'Microsoft Office 2024 Professional Plus' },
     price: 29.9,
     oldPrice: 299.99,
-    image: '/products/office-2024-professional-plus.svg',
+    image: 'products/office-2024-professional-plus.svg',
     badge: '-90%',
     description: {
       es: 'Licencia digital para Word, Excel, PowerPoint, Outlook, Access y OneNote. Ideal para empresas, autonomos y usuarios avanzados.',
@@ -82,7 +88,7 @@ const productSource = [
     name: { es: 'Windows 11 Professional', en: 'Windows 11 Professional' },
     price: 29.9,
     oldPrice: 179,
-    image: '/products/windows-11-professional.svg',
+    image: 'products/windows-11-professional.svg',
     badge: '-83%',
     description: {
       es: 'Sistema operativo profesional con BitLocker, Escritorio remoto, seguridad avanzada y funciones para empresa.',
@@ -96,7 +102,7 @@ const productSource = [
     name: { es: 'Adobe Acrobat Pro DC 2019', en: 'Adobe Acrobat Pro DC 2019' },
     price: 39.9,
     oldPrice: 199,
-    image: '/products/adobe-acrobat-pro-dc-2019.webp',
+    image: 'products/adobe-acrobat-pro-dc-2019.webp',
     badge: '-80%',
     description: {
       es: 'Licencia de por vida para editar, convertir, firmar y proteger archivos PDF desde un equipo Windows.',
@@ -110,7 +116,7 @@ const productSource = [
     name: { es: 'Adobe Acrobat Pro DC 2021', en: 'Adobe Acrobat Pro DC 2021' },
     price: 49.9,
     oldPrice: 199,
-    image: '/products/adobe-acrobat-pro-dc-2021.svg',
+    image: 'products/adobe-acrobat-pro-dc-2021.svg',
     badge: '-75%',
     description: {
       es: 'Herramienta profesional para trabajo con PDF, formularios, documentos de empresa y flujos administrativos.',
@@ -124,7 +130,7 @@ const productSource = [
     name: { es: 'Microsoft Office 2019 Professional Plus', en: 'Microsoft Office 2019 Professional Plus' },
     price: 19.9,
     oldPrice: 99.9,
-    image: '/products/office-2019-professional-plus.svg',
+    image: 'products/office-2019-professional-plus.svg',
     badge: '-80%',
     description: {
       es: 'Suite clasica de Office para documentos, hojas de calculo, presentaciones, correo y tareas administrativas.',
@@ -138,7 +144,7 @@ const productSource = [
     name: { es: 'CorelDRAW 2021 Standard', en: 'CorelDRAW 2021 Standard' },
     price: 29.9,
     oldPrice: 44.85,
-    image: '/products/coreldraw-2021-standard.webp',
+    image: 'products/coreldraw-2021-standard.webp',
     badge: '-33%',
     description: {
       es: 'Software de diseno grafico para ilustraciones, rotulos, piezas de marketing y trabajos creativos.',
@@ -152,7 +158,7 @@ const productSource = [
     name: { es: 'Microsoft Office 2021 Professional Plus', en: 'Microsoft Office 2021 Professional Plus' },
     price: 24.9,
     oldPrice: 129.9,
-    image: '/products/office-2021-professional-plus.svg',
+    image: 'products/office-2021-professional-plus.svg',
     badge: '-81%',
     description: {
       es: 'Office 2021 para usuarios que prefieren una licencia permanente sin cuotas mensuales ni renovaciones.',
@@ -166,7 +172,7 @@ const productSource = [
     name: { es: 'Windows 10 Professional', en: 'Windows 10 Professional' },
     price: 19.9,
     oldPrice: 109,
-    image: '/products/windows-10-professional.svg',
+    image: 'products/windows-10-professional.svg',
     badge: '-82%',
     description: {
       es: 'Licencia Windows 10 Pro para equipos que necesitan estabilidad, compatibilidad y funciones profesionales.',
@@ -180,7 +186,7 @@ const productSource = [
     name: { es: 'Windows 10 Home', en: 'Windows 10 Home' },
     price: 18.9,
     oldPrice: 99,
-    image: '/products/windows-10-home.svg',
+    image: 'products/windows-10-home.svg',
     badge: '-81%',
     description: {
       es: 'Licencia para usuarios domesticos que buscan activar Windows 10 de forma sencilla y economica.',
@@ -194,7 +200,7 @@ const productSource = [
     name: { es: 'Windows 11 Home', en: 'Windows 11 Home' },
     price: 26.9,
     oldPrice: 109.9,
-    image: '/products/windows-11-home.svg',
+    image: 'products/windows-11-home.svg',
     badge: '-76%',
     description: {
       es: 'Windows 11 Home para uso personal, estudio, navegacion, gaming y productividad cotidiana.',
@@ -208,7 +214,7 @@ const productSource = [
     name: { es: 'Windows Server 2022 Standard 16 Core', en: 'Windows Server 2022 Standard 16 Core' },
     price: 69.9,
     oldPrice: 104.85,
-    image: '/products/windows-server-2022-standard.webp',
+    image: 'products/windows-server-2022-standard.webp',
     badge: '-33%',
     description: {
       es: 'Licencia Windows Server para pequenas empresas, laboratorios, tecnicos y entornos de red profesionales.',
@@ -222,7 +228,7 @@ const productSource = [
     name: { es: 'Office 2024 Home and Business PC/Mac', en: 'Office 2024 Home and Business PC/Mac' },
     price: 129.9,
     oldPrice: 399.9,
-    image: '/products/office-2024-home-business.svg',
+    image: 'products/office-2024-home-business.svg',
     badge: '-68%',
     description: {
       es: 'Licencia vinculada a cuenta Microsoft para Word, Excel, PowerPoint, Outlook y OneNote en PC o Mac.',
@@ -249,7 +255,7 @@ export const getProducts = (lang: Lang = 'es') =>
     name: product.name[lang],
     price: product.price,
     oldPrice: product.oldPrice,
-    image: product.image,
+    image: asset(product.image),
     badge: product.badge,
     description: product.description[lang],
     features: product.features[lang],
