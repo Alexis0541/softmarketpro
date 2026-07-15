@@ -6,6 +6,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import ProductGrid from '~/components/widgets/ProductGrid.astro';
 import { categorySlugs, getCategory, getProductsByCategory } from '~/data/software';
 import { getLangFromUrl, localizePath } from '~/utils/i18n';
+import { getPermalink } from '~/utils/permalinks';
 
 export function getStaticPaths() {
   return categorySlugs.map((category) => ({ params: { category } }));
@@ -17,7 +18,7 @@ const category = getCategory(slug, lang);
 const categoryProducts = getProductsByCategory(slug, lang);
 
 if (!category) {
-  return Astro.redirect(localizePath('/software', lang));
+  return Astro.redirect(getPermalink(localizePath('/software', lang)));
 }
 
 const copy = {
@@ -71,14 +72,14 @@ const metadata = {
     title={`${copy.titlePrefix} ${category.name}`}
     subtitle={category.description}
     callToAction={{ text: copy.products, href: '#productos', icon: 'tabler:shopping-bag' }}
-    callToAction2={{ text: copy.allCategories, href: localizePath('/software', lang), icon: 'tabler:grid-dots' }}
+    callToAction2={{ text: copy.allCategories, href: getPermalink(localizePath('/software', lang)), icon: 'tabler:grid-dots' }}
   />
 
   <ProductGrid id="productos" title={`${copy.productsOf} ${category.name}`} subtitle={copy.subtitle} products={categoryProducts} lang={lang} />
 
   <FAQs title={`${copy.faqTitle} ${category.name}`} items={copy.faqs.map(([title, description]) => ({ title, description }))} />
 
-  <CallToAction actions={[{ variant: 'primary', text: copy.back, href: localizePath('/software', lang), icon: 'tabler:arrow-left' }]}>
+  <CallToAction actions={[{ variant: 'primary', text: copy.back, href: getPermalink(localizePath('/software', lang)), icon: 'tabler:arrow-left' }]}>
     <Fragment slot="title">{copy.ctaTitle}</Fragment>
     <Fragment slot="subtitle">{copy.ctaSubtitle}</Fragment>
   </CallToAction>

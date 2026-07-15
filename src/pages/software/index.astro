@@ -5,6 +5,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import ProductGrid from '~/components/widgets/ProductGrid.astro';
 import { getCategories, getProducts } from '~/data/software';
 import { getLangFromUrl, localizePath } from '~/utils/i18n';
+import { getPermalink } from '~/utils/permalinks';
 
 const lang = getLangFromUrl(Astro.url);
 const categories = getCategories(lang);
@@ -59,7 +60,7 @@ const metadata = {
       title: category.name,
       description: category.description,
       icon: category.icon,
-      callToAction: { text: copy.enter, href: localizePath(`/software/${category.slug}`, lang) },
+      callToAction: { text: copy.enter, href: getPermalink(localizePath(`/software/${category.slug}`, lang)) },
     }))}
   />
 
@@ -68,7 +69,7 @@ const metadata = {
   <CallToAction
     actions={[
       { variant: 'primary', text: copy.deals, href: '#productos', icon: 'tabler:star' },
-      { text: copy.home, href: localizePath('/', lang), icon: 'tabler:home' },
+      { text: copy.home, href: getPermalink(localizePath('/', lang)), icon: 'tabler:home' },
     ]}
   >
     <Fragment slot="title">{copy.ctaTitle}</Fragment>

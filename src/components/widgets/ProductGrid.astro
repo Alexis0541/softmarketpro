@@ -5,6 +5,7 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import { formatPrice, type Product } from '~/data/software';
 import type { Lang } from '~/utils/i18n';
 import { localizePath, ui } from '~/utils/i18n';
+import { getPermalink } from '~/utils/permalinks';
 
 interface Props {
   title?: string;
@@ -139,7 +140,7 @@ const t = ui[lang];
   </div>
 </div>
 
-<script define:vars={{ checkoutPath: localizePath('/checkout', lang), locale: t.locale, addToCartText: t.addToCart, addedToCartText: t.addedToCart }}>
+<script define:vars={{ checkoutPath: getPermalink(localizePath('/checkout', lang)), locale: t.locale, addToCartText: t.addToCart, addedToCartText: t.addedToCart }}>
   // @ts-nocheck
   const cartKey = 'softmarket-cart';
   const euro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' });

@@ -4,6 +4,7 @@ import Logo from '~/components/Logo.astro';
 import { getCategories } from '~/data/software';
 import type { Lang } from '~/utils/i18n';
 import { alternateLangPath, localizePath, ui } from '~/utils/i18n';
+import { getPermalink } from '~/utils/permalinks';
 
 interface Props {
   lang?: Lang;
@@ -12,8 +13,8 @@ interface Props {
 const { lang = 'es' } = Astro.props;
 const t = ui[lang];
 const categories = getCategories(lang);
-const esHref = alternateLangPath(Astro.url.pathname, 'es');
-const enHref = alternateLangPath(Astro.url.pathname, 'en');
+const esHref = getPermalink(alternateLangPath(Astro.url.pathname, 'es'));
+const enHref = getPermalink(alternateLangPath(Astro.url.pathname, 'en'));
 ---
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
@@ -22,11 +23,11 @@ const enHref = alternateLangPath(Astro.url.pathname, 'en');
   </div>
 
   <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-    <a class="flex items-center" href={localizePath('/', lang)}>
+    <a class="flex items-center" href={getPermalink(localizePath('/', lang))}>
       <Logo />
     </a>
 
-    <form class="relative flex-1 lg:max-w-xl" action={localizePath('/software', lang)}>
+    <form class="relative flex-1 lg:max-w-xl" action={getPermalink(localizePath('/software', lang))}>
       <Icon name="tabler:search" class="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
       <input
         class="w-full rounded-md border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-900"
@@ -37,10 +38,10 @@ const enHref = alternateLangPath(Astro.url.pathname, 'en');
     </form>
 
     <div class="flex flex-wrap items-center gap-3">
-      <a class="hidden text-sm font-semibold text-slate-700 hover:text-primary dark:text-slate-200 sm:inline" href={localizePath('/cuenta', lang)}>
+      <a class="hidden text-sm font-semibold text-slate-700 hover:text-primary dark:text-slate-200 sm:inline" href={getPermalink(localizePath('/cuenta', lang))}>
         {t.account}
       </a>
-      <a class="hidden text-sm font-semibold text-slate-700 hover:text-primary dark:text-slate-200 sm:inline" href={localizePath('/contact', lang)}>
+      <a class="hidden text-sm font-semibold text-slate-700 hover:text-primary dark:text-slate-200 sm:inline" href={getPermalink(localizePath('/contact', lang))}>
         {t.help}
       </a>
       <div class="inline-flex rounded-md border border-slate-300 p-1 text-xs font-black dark:border-slate-700" aria-label={t.langLabel}>
@@ -61,24 +62,24 @@ const enHref = alternateLangPath(Astro.url.pathname, 'en');
 
   <nav class="border-t border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900">
     <div class="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 sm:px-6">
-      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={localizePath('/', lang)}>
+      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={getPermalink(localizePath('/', lang))}>
         {t.navHome}
       </a>
-      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={localizePath('/software', lang)}>
+      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={getPermalink(localizePath('/software', lang))}>
         {t.navStore}
       </a>
       {categories.map((category) => (
         <a
           class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800"
-          href={localizePath(`/software/${category.slug}`, lang)}
+          href={getPermalink(localizePath(`/software/${category.slug}`, lang))}
         >
           {category.name}
         </a>
       ))}
-      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={localizePath('/contact', lang)}>
+      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={getPermalink(localizePath('/contact', lang))}>
         {t.navContact}
       </a>
-      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={localizePath('/cuenta', lang)}>
+      <a class="shrink-0 rounded px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-white hover:text-primary dark:text-slate-200 dark:hover:bg-slate-800" href={getPermalink(localizePath('/cuenta', lang))}>
         {t.navAccount}
       </a>
     </div>
@@ -125,7 +126,7 @@ const enHref = alternateLangPath(Astro.url.pathname, 'en');
   </div>
 </aside>
 
-<script define:vars={{ checkoutPath: localizePath('/checkout', lang), locale: t.locale, emptyCart: t.emptyCart, removeText: t.delete, emptyAlert: t.cartEmptyAlert }}>
+<script define:vars={{ checkoutPath: getPermalink(localizePath('/checkout', lang)), locale: t.locale, emptyCart: t.emptyCart, removeText: t.delete, emptyAlert: t.cartEmptyAlert }}>
   // @ts-nocheck
   const cartKey = 'softmarket-cart';
   const euro = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' });

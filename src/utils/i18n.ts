@@ -7,13 +7,26 @@ export type Lang = keyof typeof languages;
 
 export const defaultLang: Lang = 'es';
 
-export const getLangFromUrl = (url: URL): Lang => (url.pathname === '/en' || url.pathname.startsWith('/en/') ? 'en' : 'es');
+const getBaseSegments = () => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base.split('/').filter(Boolean);
+};
+
+export const getLangFromUrl = (url: URL): Lang => {
+  const segments = url.pathname.split('/').filter(Boolean);
+  return segments.includes('en') ? 'en' : 'es';
+};
 
 export const stripLang = (path: string) => {
-  const cleanPath = path || '/';
-  if (cleanPath === '/en') return '/';
-  if (cleanPath.startsWith('/en/')) return cleanPath.slice(3) || '/';
-  return cleanPath;
+  const baseSegments = getBaseSegments();
+  let segments = (path || '/').split('/').filter(Boolean);
+
+  if (baseSegments.length && baseSegments.every((segment, index) => segments[index] === segment)) {
+    segments = segments.slice(baseSegments.length);
+  }
+
+  segments = segments.filter((segment) => segment !== 'en');
+  return segments.length ? `/${segments.join('/')}` : '/';
 };
 
 export const localizePath = (path: string, lang: Lang) => {

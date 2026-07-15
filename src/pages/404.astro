@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import { getLangFromUrl, localizePath } from '~/utils/i18n';
+import { getPermalink } from '~/utils/permalinks';
 
 const title = `Error 404`;
 const lang = getLangFromUrl(Astro.url);
@@ -27,7 +28,7 @@ const copy = lang === 'en'
         </h2>
         <p class="text-3xl font-semibold md:text-3xl">{copy.message}</p>
         <p class="mt-4 mb-8 text-lg text-muted dark:text-slate-400">{copy.text}</p>
-        <a rel="noopener noreferrer" href={localizePath('/', lang)} class="btn ml-4">{copy.button}</a>
+        <a rel="noopener noreferrer" href={getPermalink(localizePath('/', lang))} class="btn ml-4">{copy.button}</a>
       </div>
     </div>
   </section>

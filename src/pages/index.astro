@@ -6,6 +6,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import ProductGrid from '~/components/widgets/ProductGrid.astro';
 import { formatPrice, getCategories, getProducts } from '~/data/software';
 import { getLangFromUrl, localizePath } from '~/utils/i18n';
+import { getPermalink } from '~/utils/permalinks';
 
 const lang = getLangFromUrl(Astro.url);
 const categories = getCategories(lang);
@@ -124,7 +125,7 @@ const metadata = {
           <a class="rounded-md bg-primary px-6 py-4 text-center font-black text-white shadow hover:bg-primary/90" href="#productos">
             {copy.seeDeals}
           </a>
-          <a class="rounded-md border border-white/30 px-6 py-4 text-center font-black text-white hover:bg-white/10" href={localizePath('/contact', lang)}>
+          <a class="rounded-md border border-white/30 px-6 py-4 text-center font-black text-white hover:bg-white/10" href={getPermalink(localizePath('/contact', lang))}>
             {copy.volume}
           </a>
         </div>
@@ -161,7 +162,7 @@ const metadata = {
       title: category.name,
       description: category.description,
       icon: category.icon,
-      callToAction: { text: `${copy.seeCategory} ${category.name}`, href: localizePath(`/software/${category.slug}`, lang) },
+      callToAction: { text: `${copy.seeCategory} ${category.name}`, href: getPermalink(localizePath(`/software/${category.slug}`, lang)) },
     }))}
   />
 
@@ -195,8 +196,8 @@ const metadata = {
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: copy.store, href: localizePath('/software', lang), icon: 'tabler:shopping-bag' },
-      { text: copy.askHelp, href: localizePath('/contact', lang), icon: 'tabler:message' },
+      { variant: 'primary', text: copy.store, href: getPermalink(localizePath('/software', lang)), icon: 'tabler:shopping-bag' },
+      { text: copy.askHelp, href: getPermalink(localizePath('/contact', lang)), icon: 'tabler:message' },
     ]}
   >
     <Fragment slot="title">{copy.ctaTitle}</Fragment>

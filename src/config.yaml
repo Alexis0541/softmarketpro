@@ -2,7 +2,7 @@ site:
   name: SoftMarket Pro
   site: 'https://softmarketpro.example'
   base: '/'
-  trailingSlash: false
+  trailingSlash: true
 
   googleSiteVerificationId: null
 
