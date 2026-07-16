@@ -39,6 +39,8 @@ for (const file of files) {
 }
 
 const data = fs.readFileSync(path.join(root, 'src/data/digiclara.ts'), 'utf8');
+const articleBodies = fs.readFileSync(path.join(root, 'src/data/articleBodies.ts'), 'utf8');
+if (/const text\s*=/.test(data) || /\.\.\.text\./.test(data)) failures.push('src/data/digiclara.ts: article body must not reuse the old shared text object');
 const defsBlock = data.match(/const defs = \[([\s\S]*?)\] as const;/)?.[1] || '';
 const slugs = [...defsBlock.matchAll(/^\s+\['([^']+)',\s*'[^']+',\s*'[^']+',/gm)].map((match) => match[1]);
 const duplicates = slugs.filter((slug, index) => slugs.indexOf(slug) !== index);
@@ -49,6 +51,7 @@ if (duplicateImages.length) failures.push(`duplicate article image paths: ${dupl
 for (const slug of slugs) {
   const image = path.join(root, 'public/assets/images/articles', `${slug}.jpg`);
   if (!fs.existsSync(image)) failures.push(`missing article image: ${slug}.jpg`);
+  if (!articleBodies.includes(`'${slug}':`)) failures.push(`missing article body: ${slug}`);
 }
 const hashes = new Map();
 for (const slug of slugs) {

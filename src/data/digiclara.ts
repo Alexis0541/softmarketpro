@@ -1,4 +1,6 @@
-﻿export type Lang = 'es' | 'en';
+import { articleBodies, type ArticleBodyBase } from './articleBodies';
+
+export type Lang = 'es' | 'en';
 export type TopicKey = 'security' | 'privacy' | 'windows' | 'software' | 'guides' | 'comparisons' | 'tools' | 'business' | 'wifi';
 export type ContentType = 'Guía documental' | 'Tutorial práctico' | 'Comparativa documental';
 
@@ -197,33 +199,6 @@ const sourceSets = {
   ],
 };
 
-const text = {
-  es: {
-    quick: ['Identifica primero el riesgo concreto.', 'Aplica cambios pequenos y verificables.', 'Consulta fuentes oficiales antes de tomar decisiones sensibles.'],
-    sections: [
-      ['Qué problema resuelve', ['Este tema mezcla configuración, hábitos y decisiones de confianza. La respuesta correcta depende del contexto: cuenta personal, equipo familiar o pequeña empresa.', 'DigiClara lo aborda como contenido educativo. No afirmamos pruebas propias ni resultados de laboratorio que no se hayan realizado.']],
-      ['Criterios para decidir', ['Revisa qué datos están implicados, quién puede acceder a ellos y qué ocurriría si algo falla. Prioriza medidas reversibles y documenta cambios importantes.', 'Cuando una herramienta promete resolverlo todo, busca límites, política de privacidad y documentación técnica antes de confiar.']],
-      ['Errores que conviene evitar', ['No instales programas por urgencia, no compartas códigos de verificación y no conviertas una recomendación general en una regla absoluta.', 'Si trabajas con información sensible, usa esta guía como punto de partida y pide asesoramiento especializado cuando el impacto sea alto.']],
-    ],
-    steps: ['Define el objetivo.', 'Revisa la configuración actual.', 'Aplica una mejora concreta.', 'Comprueba el resultado.', 'Anota lo aprendido para futuras revisiones.'],
-    tips: ['Prefiere documentación oficial.', 'Desconfía de mensajes urgentes.', 'Mantén copias antes de cambios grandes.'],
-    warnings: ['Una herramienta no compensa malos hábitos.', 'No todos los riesgos se ven a simple vista.', 'Las políticas de servicio pueden cambiar.'],
-    faq: [['¿Sirve para todos los casos?', 'No. Es una guía general; el contexto puede exigir medidas distintas.'], ['¿Debo instalar una herramienta nueva?', 'No necesariamente. Primero revisa opciones ya disponibles y hábitos básicos.']],
-  },
-  en: {
-    quick: ['Identify the concrete risk first.', 'Apply small, verifiable changes.', 'Use official sources before sensitive decisions.'],
-    sections: [
-      ['The problem it solves', ['This topic mixes settings, habits and trust decisions. The right answer depends on context: personal account, family device or small business.', 'DigiClara treats it as educational content. We do not claim practical tests or laboratory results that were not performed.']],
-      ['Decision criteria', ['Review what data is involved, who can access it and what would happen if something fails. Prioritise reversible measures and document important changes.', 'When a tool promises to solve everything, look for limits, privacy policy and technical documentation before trusting it.']],
-      ['Mistakes to avoid', ['Do not install software because of urgency, do not share verification codes and do not turn a general recommendation into an absolute rule.', 'If you work with sensitive information, use this guide as a starting point and seek specialised advice when the impact is high.']],
-    ],
-    steps: ['Define the goal.', 'Review the current settings.', 'Apply one concrete improvement.', 'Check the result.', 'Write down what you learned for future reviews.'],
-    tips: ['Prefer official documentation.', 'Be cautious with urgent messages.', 'Keep backups before major changes.'],
-    warnings: ['A tool does not compensate for unsafe habits.', 'Not every risk is visible at first glance.', 'Service policies can change.'],
-    faq: [['Does it fit every case?', 'No. It is general guidance; context may require different measures.'], ['Should I install a new tool?', 'Not necessarily. First review built-in options and basic habits.']],
-  },
-} as const;
-
 const defs = [
   ['reconocer-correo-phishing', 'security', 'guides', ['Phishing', 'Ingeniería social', 'Correo electrónico'], sourceSets.phishing, 'Cómo reconocer un correo de phishing antes de hacer clic', 'How to spot a phishing email before clicking', 'Señales prácticas para detectar mensajes sospechosos sin depender de alarmas exageradas.', 'Practical signs for identifying suspicious messages without relying on exaggerated alarms.', 'Fotografía relacionada con seguridad de correo y señales de alerta.', 'Photo related to email security and warning signs.', true],
   ['contrasenas-seguras', 'security', 'guides', ['Contraseñas', 'Passkeys', 'Cuentas'], sourceSets.passwords, 'Cómo crear contraseñas seguras sin olvidarlas', 'How to create strong passwords without forgetting them', 'Métodos recordables para usar claves largas, únicas y realistas.', 'Memorable ways to use long, unique and realistic passwords.', 'Fotografía relacionada con contraseñas y protección de cuentas.', 'Photo related to passwords and account protection.', false],
@@ -249,12 +224,7 @@ const defs = [
   ['copia-local-nube', 'comparisons', 'comparisons', ['Copias de seguridad', 'Nube', 'Recuperación'], sourceSets.backup, 'Copia local frente a copia en la nube', 'Local backup vs cloud backup', 'Diferencias prácticas para elegir dónde guardar tus copias de seguridad.', 'Practical differences for choosing where to store backups.', 'Fotografía de un disco externo conectado a un portátil para comparar copias locales y nube.', 'Photo of an external drive connected to a laptop for comparing local and cloud backups.', false],
 ] as const;
 
-const conclusion = (title: string, lang: Lang) =>
-  lang === 'es'
-    ? `La forma más segura de abordar ${title.toLowerCase()} es combinar información fiable, cambios medidos y revisión periodica.`
-    : `The safest way to approach ${title.toLowerCase()} is to combine reliable information, measured changes and periodic review.`;
-
-const readingTime = (body: typeof text.es | typeof text.en) =>
+const readingTime = (body: ArticleBodyBase) =>
   Math.max(4, Math.ceil([body.quick.join(' '), body.sections.map((section) => `${section[0]} ${section[1].join(' ')}`).join(' '), body.steps.join(' '), body.tips.join(' '), body.warnings.join(' '), body.faq.flat().join(' ')].join(' ').split(/\s+/).length / 210));
 
 export const articles = defs.flatMap(([slug, topic, group, tags, sources, esTitle, enTitle, esSummary, enSummary, esAlt, enAlt, featured], index) => [
@@ -273,9 +243,9 @@ export const articles = defs.flatMap(([slug, topic, group, tags, sources, esTitl
     title: esTitle,
     summary: esSummary,
     author: site.authors.es,
-    readingTime: readingTime(text.es),
+    readingTime: readingTime(articleBodies[slug].es),
     alt: esAlt,
-    body: { ...text.es, conclusion: conclusion(esTitle, 'es'), sources },
+    body: { ...articleBodies[slug].es, sources },
   },
   {
     lang: 'en' as Lang,
@@ -292,9 +262,9 @@ export const articles = defs.flatMap(([slug, topic, group, tags, sources, esTitl
     title: enTitle,
     summary: enSummary,
     author: site.authors.en,
-    readingTime: readingTime(text.en),
+    readingTime: readingTime(articleBodies[slug].en),
     alt: enAlt,
-    body: { ...text.en, conclusion: conclusion(enTitle, 'en'), sources },
+    body: { ...articleBodies[slug].en, sources },
   },
 ]);
 
