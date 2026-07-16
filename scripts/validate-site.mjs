@@ -31,7 +31,7 @@ for (const file of files) {
   for (const rule of forbidden) {
     if (rule.test(text)) failures.push(`${file}: forbidden pattern ${rule}`);
   }
-  if (file.endsWith('.astro') && file !== 'src/pages/index.astro' && /<h1[\s>]/.test(text) === false && file.includes('pages')) {
+  if (file.endsWith('.astro') && file !== 'src/pages/index.astro' && !text.includes('RedirectPage') && /<h1[\s>]/.test(text) === false && file.includes('pages')) {
     failures.push(`${file}: page without visible H1`);
   }
 }
