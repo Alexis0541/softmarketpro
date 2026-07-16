@@ -9,8 +9,8 @@ const t = ui[lang];
   <section class="section"><div class="page-shell">
     <header class="section-header"><p class="eyebrow">Tools</p><h1>Utilities that run in your browser</h1><p>We do not send passwords, passphrases or text to servers. Estimates are educational and do not replace an audit.</p></header>
     <div class="grid grid-3">
-      <div class="tool-card"><h2>Password generator</h2><button class="button primary" data-generate>Generate</button><input data-password readonly aria-label="Generated password" /></div>
-      <div class="tool-card"><h2>Passphrase generator</h2><button class="button primary" data-passphrase>Create phrase</button><input data-passphrase-output readonly aria-label="Generated passphrase" /></div>
+      <div class="tool-card"><h2>Password generator</h2><button class="button primary" data-generate>Generate</button><input data-password readonly aria-label="Generated password" /><button class="button" data-copy-password>Copy</button></div>
+      <div class="tool-card"><h2>Passphrase generator</h2><button class="button primary" data-passphrase>Create phrase</button><input data-passphrase-output readonly aria-label="Generated passphrase" /><button class="button" data-copy-passphrase>Copy</button></div>
       <div class="tool-card"><h2>Educational strength check</h2><input data-strength type="text" placeholder="Type a test password" /><p data-strength-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Reading time</h2><textarea data-read-text rows="5" placeholder="Paste text"></textarea><p data-read-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Windows protection checklist</h2><ul><li><label><input type="checkbox" /> Updates enabled</label></li><li><label><input type="checkbox" /> Backup tested</label></li><li><label><input type="checkbox" /> Screen lock enabled</label></li><li><label><input type="checkbox" /> Defender has no critical alerts</label></li></ul></div>
@@ -26,6 +26,14 @@ const t = ui[lang];
     });
     document.querySelector('[data-passphrase]')?.addEventListener('click', () => {
       document.querySelector('[data-passphrase-output]').value = Array.from({ length: 5 }, () => pick(words)).join('-') + '-' + Math.floor(10 + Math.random() * 90);
+    });
+    document.querySelector('[data-copy-password]')?.addEventListener('click', async () => {
+      const value = document.querySelector('[data-password]').value;
+      if (value) await navigator.clipboard.writeText(value);
+    });
+    document.querySelector('[data-copy-passphrase]')?.addEventListener('click', async () => {
+      const value = document.querySelector('[data-passphrase-output]').value;
+      if (value) await navigator.clipboard.writeText(value);
     });
     document.querySelector('[data-strength]')?.addEventListener('input', (event) => {
       const v = event.target.value;

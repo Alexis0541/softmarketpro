@@ -8,7 +8,7 @@ metadata:
   title:
     default: DigiClara
     template: '%s | DigiClara'
-  description: 'Blog independiente con guias, comparativas y recursos para elegir software, proteger dispositivos y mejorar la privacidad digital.'
+  description: 'Blog independiente con guías, comparativas y recursos para elegir software, proteger dispositivos y mejorar la privacidad digital.'
   robots:
     index: true
     follow: true

@@ -15,6 +15,8 @@ Contacto: digiclara000@gmail.com
 - Articulos ES: `/es/articulos/[slug]/`
 - Articles EN: `/en/articles/[slug]/`
 - Herramientas: `/es/herramientas/` y `/en/tools/`
+- Empieza aqui: `/es/empieza-aqui/` y `/en/start-here/`
+- Autor: `/es/autores/alexis-moncada/` y `/en/authors/alexis-moncada/`
 - Legal: `/es/legal/` y `/en/legal/`
 
 ## Comandos
@@ -75,6 +77,8 @@ Antes de publicar cambios importantes, revisar:
 
 - `PLAN-EDITORIAL.md`
 - `REVISION-ANTES-DE-PUBLICAR.md`
+- `REVISION-ANTES-DE-MONETIZAR.md`
 - `public/assets/media-credits.json`
+- `src/data/image-credits.json`
 - Resultado de `npm run validate`
 - Resultado de `npm run build`

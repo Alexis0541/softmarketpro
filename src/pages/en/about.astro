@@ -1,0 +1,19 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { site } from '~/data/digiclara';
+---
+<DigiLayout lang="en" title="About" description="What DigiClara is and how its editorial work is done.">
+  <section class="section"><div class="page-shell article-body">
+    <p class="eyebrow">About DigiClara</p>
+    <h1>Clarity, independence and practical technology</h1>
+    <p>DigiClara is an independent editorial site created to explain digital security, privacy, Windows, networks and safe software in clear language.</p>
+    <h2>Mission and audience</h2>
+    <p>It helps people, families and small businesses make better digital decisions without promising absolute security or pushing unnecessary purchases.</p>
+    <h2>Editorial lead</h2>
+    <p>The site is led by {site.ownerName}, from Spain. Editorial contact: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <h2>Independence and future commercial relationships</h2>
+    <p>DigiClara currently shows no advertising, uses no affiliate links and has no official social profiles. If a future commercial relationship exists, it must be clearly identified.</p>
+    <h2>Sources, updates and corrections</h2>
+    <p>Sources prioritise official documentation, public organisations, privacy policies and stable technical references. Corrections can be reported by email and relevant updates change the visible date.</p>
+  </div></section>
+</DigiLayout>

@@ -24,7 +24,20 @@ export default defineConfig({
   output: 'static',
 
   integrations: [
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        !/[áéíóúÁÉÍÓÚñÑ]/.test(page) &&
+        ![
+          '/es/recursos/',
+          '/en/about-us/',
+          '/es/autores/',
+          '/en/authors/',
+          '/es/articulos/copia-seguridad/',
+          '/es/articulos/wifi-publica/',
+          '/es/articulos/proveedor-internet/',
+          '/es/articulos/vpn-gratuita-pago/',
+        ].some((route) => page.endsWith(route)),
+    }),
     icon({
       include: {
         tabler: ['*'],

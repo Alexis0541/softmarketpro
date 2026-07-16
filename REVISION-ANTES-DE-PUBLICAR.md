@@ -20,6 +20,8 @@
 - [ ] Confirmar que cada articulo tiene imagen unica.
 - [ ] Confirmar que ningun articulo usa `digiclara-og.svg` como portada.
 - [ ] Revisar herramientas locales.
+- [ ] Revisar Empieza aqui.
+- [ ] Revisar pagina de autor.
 - [ ] Revisar 404.
 - [ ] Revisar movil, accesibilidad, contraste y foco.
 - [ ] Ejecutar `npm run validate`.

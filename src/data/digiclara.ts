@@ -36,13 +36,13 @@ export const ui = {
     search: 'Buscar',
     searchPlaceholder: 'Buscar guías, temas o etiquetas',
     language: 'Idioma',
-    menu: 'Menu',
+    menu: 'Menú',
     close: 'Cerrar',
     readMore: 'Leer artículo',
     featured: 'Artículo destacado',
     latest: 'Guías recientes',
     privacy: 'Privacidad digital',
-    security: 'Ciberseguridad practica',
+    security: 'Ciberseguridad práctica',
     windows: 'Windows sin complicaciones',
     comparisons: 'Comparativas educativas',
     freeTools: 'Herramientas locales',
@@ -114,7 +114,7 @@ export const topics: Record<TopicKey, { es: { slug: string; name: string; summar
     en: { slug: 'windows', name: 'Windows', summary: 'Settings, updates, Microsoft Defender, backups and recovery.' },
   },
   software: {
-    es: { slug: 'software', name: 'Software', summary: 'Eleccion segura de programas, actualizaciones, permisos y descargas confiables.' },
+    es: { slug: 'software', name: 'Software', summary: 'Elección segura de programas, actualizaciones, permisos y descargas confiables.' },
     en: { slug: 'software', name: 'Software', summary: 'Safe software choices, updates, permissions and trustworthy downloads.' },
   },
   guides: {
@@ -130,7 +130,7 @@ export const topics: Record<TopicKey, { es: { slug: string; name: string; summar
     en: { slug: 'tools', name: 'Tools', summary: 'Local utilities that run in the browser and do not send passwords to servers.' },
   },
   business: {
-    es: { slug: 'pequenas-empresas', name: 'Pequeñas empresas', summary: 'Medidas realistas para equipos pequenos: cuentas, copias, accesos, formacion y respuesta.' },
+    es: { slug: 'pequenas-empresas', name: 'Pequeñas empresas', summary: 'Medidas realistas para equipos pequeños: cuentas, copias, accesos, formación y respuesta.' },
     en: { slug: 'small-business', name: 'Small business', summary: 'Realistic measures for small teams: accounts, backups, access, training and response.' },
   },
   wifi: {
@@ -141,6 +141,7 @@ export const topics: Record<TopicKey, { es: { slug: string; name: string; summar
 
 export const navItems = (lang: Lang) => [
   { label: lang === 'es' ? 'Inicio' : 'Home', href: langPath(lang, '/') },
+  { label: lang === 'es' ? 'Empieza aquí' : 'Start here', href: langPath(lang, lang === 'es' ? 'empieza-aqui' : 'start-here') },
   { label: topics.security[lang].name, href: langPath(lang, topics.security[lang].slug) },
   { label: topics.privacy[lang].name, href: langPath(lang, topics.privacy[lang].slug) },
   { label: topics.windows[lang].name, href: langPath(lang, topics.windows[lang].slug) },
@@ -148,7 +149,7 @@ export const navItems = (lang: Lang) => [
   { label: topics.guides[lang].name, href: langPath(lang, topics.guides[lang].slug) },
   { label: topics.comparisons[lang].name, href: langPath(lang, topics.comparisons[lang].slug) },
   { label: topics.tools[lang].name, href: langPath(lang, topics.tools[lang].slug) },
-  { label: lang === 'es' ? 'Sobre nosotros' : 'About us', href: langPath(lang, lang === 'es' ? 'sobre-nosotros' : 'about-us') },
+  { label: lang === 'es' ? 'Sobre nosotros' : 'About', href: langPath(lang, lang === 'es' ? 'sobre-nosotros' : 'about') },
 ];
 
 export const langPath = (lang: Lang, path = '/') => {
@@ -201,13 +202,13 @@ const text = {
     quick: ['Identifica primero el riesgo concreto.', 'Aplica cambios pequenos y verificables.', 'Consulta fuentes oficiales antes de tomar decisiones sensibles.'],
     sections: [
       ['Qué problema resuelve', ['Este tema mezcla configuración, hábitos y decisiones de confianza. La respuesta correcta depende del contexto: cuenta personal, equipo familiar o pequeña empresa.', 'DigiClara lo aborda como contenido educativo. No afirmamos pruebas propias ni resultados de laboratorio que no se hayan realizado.']],
-      ['Criterios para decidir', ['Revisa qué datos están implicados, quién puede acceder a ellos y que ocurriría si algo falla. Prioriza medidas reversibles y documenta cambios importantes.', 'Cuando una herramienta promete resolverlo todo, busca límites, política de privacidad y documentacion técnica antes de confiar.']],
+      ['Criterios para decidir', ['Revisa qué datos están implicados, quién puede acceder a ellos y qué ocurriría si algo falla. Prioriza medidas reversibles y documenta cambios importantes.', 'Cuando una herramienta promete resolverlo todo, busca límites, política de privacidad y documentación técnica antes de confiar.']],
       ['Errores que conviene evitar', ['No instales programas por urgencia, no compartas códigos de verificación y no conviertas una recomendación general en una regla absoluta.', 'Si trabajas con información sensible, usa esta guía como punto de partida y pide asesoramiento especializado cuando el impacto sea alto.']],
     ],
-    steps: ['Define el objetivo.', 'Revisa la configuración actual.', 'Aplica una mejora concreta.', 'Comprueba el resultado.', 'Anota lo aprendido para futuras revisiónes.'],
-    tips: ['Prefiere documentacion oficial.', 'Desconfia de mensajes urgentes.', 'MantÃ©n copias antes de cambios grandes.'],
+    steps: ['Define el objetivo.', 'Revisa la configuración actual.', 'Aplica una mejora concreta.', 'Comprueba el resultado.', 'Anota lo aprendido para futuras revisiones.'],
+    tips: ['Prefiere documentación oficial.', 'Desconfía de mensajes urgentes.', 'Mantén copias antes de cambios grandes.'],
     warnings: ['Una herramienta no compensa malos hábitos.', 'No todos los riesgos se ven a simple vista.', 'Las políticas de servicio pueden cambiar.'],
-    faq: [['Sirve para todos los casos?', 'No. Es una guía general; el contexto puede exigir medidas distintas.'], ['Debo instalar una herramienta nueva?', 'No necesariamente. Primero revisa opciones ya disponibles y hábitos básicos.']],
+    faq: [['¿Sirve para todos los casos?', 'No. Es una guía general; el contexto puede exigir medidas distintas.'], ['¿Debo instalar una herramienta nueva?', 'No necesariamente. Primero revisa opciones ya disponibles y hábitos básicos.']],
   },
   en: {
     quick: ['Identify the concrete risk first.', 'Apply small, verifiable changes.', 'Use official sources before sensitive decisions.'],
@@ -224,8 +225,8 @@ const text = {
 } as const;
 
 const defs = [
-  ['reconocer-correo-phishing', 'security', 'guides', ['Phishing', 'Ingenieria social', 'Correo electrónico'], sourceSets.phishing, 'Cómo reconocer un correo de phishing antes de hacer clic', 'How to spot a phishing email before clicking', 'Señales prácticas para detectar mensajes sospechosos sin depender de alarmas exageradas.', 'Practical signs for identifying suspicious messages without relying on exaggerated alarms.', 'Ilustración de un correo sospechoso con senales de alerta marcadas.', 'Illustration of a suspicious email with warning signs highlighted.', true],
-  ['contrasenas-seguras', 'security', 'guides', ['Contraseñas', 'Passkeys', 'Cuentas'], sourceSets.passwords, 'Cómo crear contraseñas seguras sin olvidarlas', 'How to create strong passwords without forgetting them', 'Metodos recordables para usar claves largas, únicas y realistas.', 'Memorable ways to use long, unique and realistic passwords.', 'Ilustración de una frase de contraseña formada por palabras separadas.', 'Illustration of a passphrase made of separated words.', false],
+  ['reconocer-correo-phishing', 'security', 'guides', ['Phishing', 'Ingeniería social', 'Correo electrónico'], sourceSets.phishing, 'Cómo reconocer un correo de phishing antes de hacer clic', 'How to spot a phishing email before clicking', 'Señales prácticas para detectar mensajes sospechosos sin depender de alarmas exageradas.', 'Practical signs for identifying suspicious messages without relying on exaggerated alarms.', 'Fotografía relacionada con seguridad de correo y señales de alerta.', 'Photo related to email security and warning signs.', true],
+  ['contrasenas-seguras', 'security', 'guides', ['Contraseñas', 'Passkeys', 'Cuentas'], sourceSets.passwords, 'Cómo crear contraseñas seguras sin olvidarlas', 'How to create strong passwords without forgetting them', 'Métodos recordables para usar claves largas, únicas y realistas.', 'Memorable ways to use long, unique and realistic passwords.', 'Fotografía relacionada con contraseñas y protección de cuentas.', 'Photo related to passwords and account protection.', false],
   ['windows-equipo-nuevo', 'windows', 'guides', ['Windows', 'Microsoft Defender', 'Configuración'], sourceSets.windows, 'Cómo proteger un equipo Windows nuevo desde el primer día', 'How to protect a new Windows computer from day one', 'Ajustes iniciales para reducir riesgos antes de instalar demasiados programas.', 'Initial settings to reduce risk before installing too many programs.', 'Ilustración de un portatil Windows con capas de protección básicas.', 'Illustration of a Windows laptop with basic protection layers.', false],
   ['copia-seguridad-321', 'windows', 'guides', ['Copias de seguridad', 'Recuperación', 'Ransomware'], sourceSets.backup, 'Regla 3-2-1 de copias de seguridad explicada sin complicaciones', 'The 3-2-1 backup rule explained simply', 'Cómo combinar copias locales y externas para recuperarte mejor.', 'How to combine local and external copies to recover better.', 'Diagrama de la regla 3-2-1 con tres copias, dos soportes y una fuera del equipo.', 'Diagram of the 3-2-1 rule with three copies, two media types and one off-device copy.', false],
   ['que-es-vpn', 'privacy', 'guides', ['VPN', 'Privacidad', 'Redes'], sourceSets.vpn, 'Qué es una VPN y que no puede prometer', 'What a VPN is and what it cannot promise', 'Explicacion neutral sobre túneles cifrados, límites reales y usos responsables.', 'A neutral explanation of encrypted tunnels, real limits and responsible uses.', 'Ilustración conceptual de una conexión cifrada entre dispositivo, servidor VPN e Internet.', 'Conceptual illustration of an encrypted connection between device, VPN server and internet.', false],

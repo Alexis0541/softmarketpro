@@ -1,0 +1,21 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import ArticleCard from '~/components/dc/ArticleCard.astro';
+import { getArticles, site } from '~/data/digiclara';
+const articles = getArticles('es');
+---
+<DigiLayout lang="es" title="Alexis Moncada" description="Página de autor de Alexis Moncada en DigiClara.">
+  <section class="section"><div class="page-shell article-body">
+    <p class="eyebrow">Autor</p>
+    <h1>Alexis Moncada</h1>
+    <p><strong>Rol:</strong> responsable editorial de DigiClara.</p>
+    <p><strong>País:</strong> {site.country}. <strong>Contacto:</strong> <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <p>Alexis Moncada publica y revisa guías educativas sobre ciberseguridad, privacidad, Windows, software seguro, redes y protección de pequeñas empresas. El perfil no incluye fotografía, cargos, estudios, premios ni certificaciones no verificadas.</p>
+    <h2>Cómo selecciona fuentes</h2>
+    <p>Prioriza documentación oficial, organismos públicos de ciberseguridad, soporte de plataformas y políticas publicadas por los servicios tratados.</p>
+    <h2>Actualizaciones y metodología</h2>
+    <p>Los contenidos se revisan cuando cambian sistemas, políticas o recomendaciones. Una guía documental explica conceptos con fuentes; una prueba práctica solo se declara cuando se ha realizado realmente.</p>
+    <p><strong>Perfil actualizado:</strong> 2026-07-16.</p>
+  </div></section>
+  <section class="section"><div class="page-shell"><h2>Artículos publicados</h2><div class="grid grid-3">{articles.map((article) => <ArticleCard article={article} lang="es" />)}</div></div></section>
+</DigiLayout>

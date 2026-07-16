@@ -1,19 +1,4 @@
 ---
-import DigiLayout from '~/layouts/DigiLayout.astro';
-import ArticleCard from '~/components/dc/ArticleCard.astro';
-import { getArticles, site } from '~/data/digiclara';
-const articles = getArticles('es');
+import RedirectPage from '~/components/dc/RedirectPage.astro';
 ---
-<DigiLayout lang="es" title="Alexis Moncada" description="Pagina de autor de Alexis Moncada en DigiClara.">
-  <section class="section"><div class="page-shell article-body">
-    <p class="eyebrow">Autor</p>
-    <h1>Alexis Moncada</h1>
-    <p><strong>Rol:</strong> responsable editorial de DigiClara.</p>
-    <p><strong>Pais:</strong> {site.country}. <strong>Contacto:</strong> <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
-    <p>Alexis Moncada publica y revisa guias educativas sobre ciberseguridad, privacidad, Windows, software seguro, redes y proteccion de pequenas empresas. El perfil no incluye fotografia, cargos o certificaciones no verificadas.</p>
-    <h2>Metodo de trabajo</h2>
-    <p>Los contenidos se basan en documentacion oficial, organismos publicos de ciberseguridad y explicaciones practicas. Cuando una pieza es documental, no se presenta como prueba de laboratorio.</p>
-    <p><strong>Perfil actualizado:</strong> 2026-07-16.</p>
-  </div></section>
-  <section class="section"><div class="page-shell"><h2>Articulos publicados</h2><div class="grid grid-3">{articles.map((article) => <ArticleCard article={article} lang="es" />)}</div></div></section>
-</DigiLayout>
+<RedirectPage title="Autor" to="/es/autores/alexis-moncada/" />

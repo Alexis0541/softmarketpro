@@ -1,0 +1,21 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { withBase } from '~/utils/paths';
+
+const paths = [
+  ['Quiero proteger mis cuentas', ['contrasenas-seguras', 'autenticacion-dos-pasos', 'proteger-cuenta-microsoft']],
+  ['Quiero proteger mi ordenador', ['windows-equipo-nuevo', 'privacidad-windows', 'copia-seguridad-321']],
+  ['Quiero navegar con más privacidad', ['que-es-vpn', 'proveedor-internet-datos', 'wifi-publica-segura']],
+  ['Quiero entender qué hace una VPN', ['que-es-vpn', 'vpn-proxy', 'vpn-antivirus', 'vpn-gratuita-vs-pago']],
+  ['Quiero reconocer estafas', ['reconocer-correo-phishing', 'comprobar-enlace-peligroso', 'descarga-falsa']],
+  ['Quiero proteger una pequeña empresa', ['seguridad-pequena-empresa', 'copia-local-nube', 'router-casa-seguro']],
+];
+---
+<DigiLayout lang="es" title="Empieza aquí" description="Rutas de aprendizaje para usar DigiClara según tu objetivo de seguridad digital.">
+  <section class="section"><div class="page-shell">
+    <header class="section-header"><p class="eyebrow">Empieza aquí</p><h1>Elige una ruta de aprendizaje</h1><p class="lead">Si no sabes por dónde empezar, estas rutas agrupan guías reales de DigiClara por objetivo práctico.</p></header>
+    <div class="grid grid-3">
+      {paths.map(([title, slugs]) => <article class="card"><h2>{title}</h2><ol>{slugs.map((slug) => <li><a href={withBase(`/es/articulos/${slug}/`)}>{slug.replaceAll('-', ' ')}</a></li>)}</ol></article>)}
+    </div>
+  </div></section>
+</DigiLayout>

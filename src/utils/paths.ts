@@ -21,14 +21,16 @@ export const alternatePath = (pathname: string, target: Lang) => {
       buscar: 'buscar',
       herramientas: 'herramientas',
       'sobre-nosotros': 'sobre-nosotros',
-      autores: 'autores',
+      'empieza-aqui': 'empieza-aqui',
+      'autores/alexis-moncada': 'autores/alexis-moncada',
       contacto: 'contacto',
     },
     en: {
       buscar: 'search',
       herramientas: 'tools',
-      'sobre-nosotros': 'about-us',
-      autores: 'authors',
+      'sobre-nosotros': 'about',
+      'empieza-aqui': 'start-here',
+      'autores/alexis-moncada': 'authors/alexis-moncada',
       contacto: 'contact',
     },
   };
@@ -44,7 +46,8 @@ export const alternatePath = (pathname: string, target: Lang) => {
   }
   const topic = Object.values(topics).find((item) => item[current].slug === route[0]);
   if (topic) return withBase(langPath(target, topic[target].slug));
-  const mapped = Object.entries(knownRoutes[current]).find(([, value]) => value === route[0])?.[0];
+  const routeKey = route.join('/');
+  const mapped = Object.entries(knownRoutes[current]).find(([, value]) => value === routeKey || value === route[0])?.[0];
   if (mapped) return withBase(langPath(target, knownRoutes[target][mapped]));
   return withBase(langPath(target));
 };

@@ -9,8 +9,8 @@ const t = ui[lang];
   <section class="section"><div class="page-shell">
     <header class="section-header"><p class="eyebrow">Herramientas</p><h1>Utilidades que funcionan en tu navegador</h1><p>No enviamos contraseñas, frases ni textos a servidores. Las estimaciones son educativas y no sustituyen una auditoría.</p></header>
     <div class="grid grid-3">
-      <div class="tool-card"><h2>Generador de contraseñas</h2><button class="button primary" data-generate>Generar</button><input data-password readonly aria-label="Contraseña generada" /></div>
-      <div class="tool-card"><h2>Generador de frases</h2><button class="button primary" data-passphrase>Crear frase</button><input data-passphrase-output readonly aria-label="Frase de contraseña generada" /></div>
+      <div class="tool-card"><h2>Generador de contraseñas</h2><button class="button primary" data-generate>Generar</button><input data-password readonly aria-label="Contraseña generada" /><button class="button" data-copy-password>Copiar</button></div>
+      <div class="tool-card"><h2>Generador de frases</h2><button class="button primary" data-passphrase>Crear frase</button><input data-passphrase-output readonly aria-label="Frase de contraseña generada" /><button class="button" data-copy-passphrase>Copiar</button></div>
       <div class="tool-card"><h2>Fortaleza educativa</h2><input data-strength type="text" placeholder="Escribe una contraseña de prueba" /><p data-strength-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Lectura estimada</h2><textarea data-read-text rows="5" placeholder="Pega un texto"></textarea><p data-read-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Lista para proteger Windows</h2><ul><li><label><input type="checkbox" /> Actualizaciones activas</label></li><li><label><input type="checkbox" /> Copia de seguridad probada</label></li><li><label><input type="checkbox" /> Bloqueo de pantalla</label></li><li><label><input type="checkbox" /> Defender sin alertas críticas</label></li></ul></div>
@@ -26,6 +26,14 @@ const t = ui[lang];
     });
     document.querySelector('[data-passphrase]')?.addEventListener('click', () => {
       document.querySelector('[data-passphrase-output]').value = Array.from({ length: 5 }, () => pick(words)).join('-') + '-' + Math.floor(10 + Math.random() * 90);
+    });
+    document.querySelector('[data-copy-password]')?.addEventListener('click', async () => {
+      const value = document.querySelector('[data-password]').value;
+      if (value) await navigator.clipboard.writeText(value);
+    });
+    document.querySelector('[data-copy-passphrase]')?.addEventListener('click', async () => {
+      const value = document.querySelector('[data-passphrase-output]').value;
+      if (value) await navigator.clipboard.writeText(value);
     });
     document.querySelector('[data-strength]')?.addEventListener('input', (event) => {
       const v = event.target.value;
