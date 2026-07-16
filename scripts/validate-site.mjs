@@ -65,7 +65,7 @@ for (const creditFile of creditFiles) {
     failures.push(`missing ${creditFile}`);
     continue;
   }
-  const credits = JSON.parse(fs.readFileSync(full, 'utf8'));
+  const credits = JSON.parse(fs.readFileSync(full, 'utf8').replace(/^\uFEFF/, ''));
   for (const image of imagePaths) {
     const credit = credits.find((item) => item.file === image);
     if (!credit) failures.push(`${creditFile}: missing credit for ${image}`);
