@@ -1,15 +1,28 @@
 ---
 import DigiLayout from '~/layouts/DigiLayout.astro';
-import { legalPages } from '~/data/digiclara';
+import { legalPages, site } from '~/data/digiclara';
 export function getStaticPaths() { return Object.values(legalPages).map((p) => ({ params: { page: p.en[0] } })); }
-const page = Object.values(legalPages).find((p) => p.en[0] === Astro.params.page)?.en;
-if (!page) return Astro.redirect('/en/');
+const entry = Object.entries(legalPages).find(([, p]) => p.en[0] === Astro.params.page);
+if (!entry) return Astro.redirect('/en/');
+const [kind, page] = [entry[0], entry[1].en];
+const common = [
+  ['Controller', [`Editorial controller: ${site.ownerName}. Country: Spain. Contact email: ${site.email}.`]],
+  ['Scope', ['DigiClara publishes educational content about technology, cybersecurity, privacy and safer software. The information does not replace legal, technical or professional advice for a specific case.']],
+];
+const sections = {
+  legal: [...common, ['Identification', ['DigiClara does not claim a company, office, phone number or tax identifier because those details have not been provided for this version. If required later, they must be reviewed before commercial changes are published.']]],
+  privacy: [...common, ['Data processed', ['The site has no contact form and no newsletter. Contact uses mailto, so email is handled by the visitor email client and the receiving account shown on the site.']], ['Local tools', ['Password, checklist and reading tools run in the browser. They do not send passwords or text to DigiClara servers.']]],
+  cookies: [...common, ['Cookies and storage', ['This version includes no analytics, advertising or social profiles. Local storage may be used only for interface features if visual preferences are implemented.']]],
+  terms: [...common, ['Use of content', ['You may read the content for information. It must not be presented as personalised professional advice or used for unlawful activity.']]],
+  affiliates: [...common, ['Current status', ['DigiClara does not currently use affiliate links. If they are enabled in the future, they must be clearly identified and must not determine editorial conclusions.']]],
+  editorial: [...common, ['Editorial criteria', ['Topics are selected for usefulness to users and small businesses. Facts, recommendations and opinions are separated, and tests are not claimed unless they were actually performed.']], ['Responsible AI use', ['AI may help structure drafts or review clarity, but content needs human review and verifiable sources before publication.']]],
+  methodology: [...common, ['Content types', ['Documentary guide: explains concepts with sources. Practical tutorial: gives verifiable steps. Documentary comparison: contrasts public criteria. Practical test: used only when a real test was performed.']]],
+  corrections: [...common, ['How to report errors', [`Email ${site.email} with the URL, affected fragment and proposed correction. Important changes will update the visible content date.`]]],
+}[kind];
 ---
 <DigiLayout lang="en" title={page[1]} description={page[2]}>
   <section class="section"><div class="page-shell article-body">
     <h1>{page[1]}</h1><p>{page[2]}</p>
-    <h2>Scope</h2><p>This page describes DigiClara's current editorial operation. It does not replace professional legal advice.</p>
-    <h2>Pending details</h2><p>Before publishing a commercial version, contact email, legal controller and any applicable local requirement must be completed.</p>
-    <h2>Commitment</h2><p>We do not use hidden promotions, do not claim tests that were not performed and do not collect sensitive data from local tools.</p>
+    {sections.map(([heading, paragraphs]) => <section><h2>{heading}</h2>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</section>)}
   </div></section>
 </DigiLayout>

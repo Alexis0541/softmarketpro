@@ -1,20 +1,19 @@
 ---
 import DigiLayout from '~/layouts/DigiLayout.astro';
-import { ui } from '~/data/digiclara';
-const t = ui.es;
+import { site } from '~/data/digiclara';
 ---
-<DigiLayout lang="es" title="Contacto" description="Formulario editorial de contacto de DigiClara.">
+<DigiLayout lang="es" title="Contacto" description="Contacto editorial de DigiClara.">
   <section class="section"><div class="page-shell article-body">
-    <h1>Contacto editorial</h1><p>{t.contactNote}</p>
-    <form data-contact-form>
-      <label>Nombre<input required name="nombre" /></label>
-      <label>Correo<input required type="email" name="email" /></label>
-      <label>Asunto<input required name="asunto" /></label>
-      <label>Tipo de consulta<select><option>Correccion de contenido</option><option>Sugerencia</option><option>Problema tecnico</option><option>Consulta editorial</option><option>Colaboracion</option><option>Otro</option></select></label>
-      <label>Mensaje<textarea required rows="6"></textarea></label>
-      <label><input required type="checkbox" /> Acepto que estos datos se usen para responder a mi consulta cuando el formulario este configurado.</label>
-      <button class="button primary" type="submit">Validar formulario</button>
-    </form>
+    <p class="eyebrow">Contacto</p>
+    <h1>Contacto editorial</h1>
+    <p>DigiClara es responsabilidad editorial de {site.ownerName}. El sitio se gestiona desde {site.country} y atiende consultas sobre correcciones, sugerencias, problemas tecnicos y propuestas editoriales por correo electronico.</p>
+    <div class="notice sage">
+      <h2>Datos de contacto</h2>
+      <p><strong>Responsable:</strong> {site.ownerName}</p>
+      <p><strong>Rol:</strong> Responsable editorial de DigiClara</p>
+      <p><strong>Pais:</strong> {site.country}</p>
+      <p><strong>Correo:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+    <a class="button primary" href={`mailto:${site.email}?subject=Consulta%20desde%20DigiClara`}>Enviar un correo</a>
   </div></section>
-  <script>document.querySelector('[data-contact-form]')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Formulario validado. No se envia informacion porque no hay backend configurado.'); });</script>
 </DigiLayout>

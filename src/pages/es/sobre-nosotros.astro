@@ -1,13 +1,21 @@
 ---
 import DigiLayout from '~/layouts/DigiLayout.astro';
+import { site } from '~/data/digiclara';
 ---
-<DigiLayout lang="es" title="Sobre nosotros" description="Que es DigiClara y como trabaja su equipo editorial.">
+<DigiLayout lang="es" title="Sobre nosotros" description="Que es DigiClara y como trabaja su responsable editorial.">
   <section class="section"><div class="page-shell article-body">
     <p class="eyebrow">Sobre DigiClara</p>
     <h1>Claridad, independencia y tecnologia practica</h1>
-    <p>DigiClara es un blog independiente con guias, comparativas y recursos para elegir software, proteger dispositivos y mejorar la privacidad digital.</p>
-    <h2>Mision</h2><p>Explicar tecnologia cotidiana con lenguaje claro, sin promesas absolutas ni presiones comerciales.</p>
-    <h2>Independencia editorial</h2><p>Las conclusiones se basan en documentacion publica, criterios explicados y pruebas practicas solo cuando se hayan realizado. Las relaciones comerciales futuras deberan identificarse.</p>
-    <h2>Actualizacion y fuentes</h2><p>Revisamos contenidos cuando cambian sistemas, politicas o recomendaciones. Si falta un dato, preferimos decirlo antes que inventarlo.</p>
+    <p>DigiClara es un blog independiente creado para explicar seguridad digital, privacidad, Windows, redes y software seguro con lenguaje claro.</p>
+    <h2>Mision</h2>
+    <p>Ayudar a personas, familias y pequenas empresas a tomar mejores decisiones digitales sin prometer seguridad absoluta ni empujar compras innecesarias.</p>
+    <h2>Responsable editorial</h2>
+    <p>El responsable es {site.ownerName}, desde {site.country}. El contacto editorial es <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <h2>Independencia</h2>
+    <p>Actualmente DigiClara no muestra publicidad, no usa enlaces afiliados y no mantiene redes sociales oficiales. Si en el futuro existe una relacion comercial, debera identificarse de forma clara.</p>
+    <h2>Como investigamos</h2>
+    <p>Priorizamos documentacion oficial, organismos publicos, politicas de privacidad y fuentes tecnicas estables. Diferenciamos guias documentales, comparativas documentales y pruebas practicas cuando realmente se hayan realizado.</p>
+    <h2>Correcciones</h2>
+    <p>Si detectas un error, puedes escribir por correo. Las correcciones relevantes se revisan y se reflejan actualizando la fecha del contenido.</p>
   </div></section>
 </DigiLayout>

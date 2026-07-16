@@ -5,26 +5,32 @@ const lang = 'es';
 const t = ui[lang];
 ---
 
-<DigiLayout lang={lang} title="Herramientas gratuitas" description="Herramientas locales de seguridad y productividad digital.">
+<DigiLayout lang={lang} title="Herramientas locales" description="Herramientas locales de seguridad y productividad digital.">
   <section class="section"><div class="page-shell">
-    <header class="section-header"><p class="eyebrow">Herramientas</p><h1>Utilidades que funcionan en tu navegador</h1><p>No enviamos contraseñas ni datos sensibles a servidores.</p></header>
+    <header class="section-header"><p class="eyebrow">Herramientas</p><h1>Utilidades que funcionan en tu navegador</h1><p>No enviamos contraseñas, frases ni textos a servidores. Las estimaciones son educativas y no sustituyen una auditoría.</p></header>
     <div class="grid grid-3">
-      <div class="tool-card"><h2>Generador de contraseñas</h2><button class="button primary" data-generate>Generar</button><input data-password readonly aria-label="Contrasena generada" /></div>
-      <div class="tool-card"><h2>Fortaleza educativa</h2><input data-strength type="text" placeholder="Escribe una contrasena de prueba" /><p data-strength-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Generador de contraseñas</h2><button class="button primary" data-generate>Generar</button><input data-password readonly aria-label="Contraseña generada" /></div>
+      <div class="tool-card"><h2>Generador de frases</h2><button class="button primary" data-passphrase>Crear frase</button><input data-passphrase-output readonly aria-label="Frase de contraseña generada" /></div>
+      <div class="tool-card"><h2>Fortaleza educativa</h2><input data-strength type="text" placeholder="Escribe una contraseña de prueba" /><p data-strength-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Lectura estimada</h2><textarea data-read-text rows="5" placeholder="Pega un texto"></textarea><p data-read-result>{t.estimate}</p></div>
-      <div class="tool-card"><h2>Lista para proteger Windows</h2><ul><li><label><input type="checkbox" /> Actualizaciones activas</label></li><li><label><input type="checkbox" /> Copia de seguridad</label></li><li><label><input type="checkbox" /> Bloqueo de pantalla</label></li></ul></div>
-      <div class="tool-card"><h2>Lista anti-phishing</h2><ul><li><label><input type="checkbox" /> Revisar remitente</label></li><li><label><input type="checkbox" /> No abrir adjuntos inesperados</label></li><li><label><input type="checkbox" /> Comprobar dominio</label></li></ul></div>
+      <div class="tool-card"><h2>Lista para proteger Windows</h2><ul><li><label><input type="checkbox" /> Actualizaciones activas</label></li><li><label><input type="checkbox" /> Copia de seguridad probada</label></li><li><label><input type="checkbox" /> Bloqueo de pantalla</label></li><li><label><input type="checkbox" /> Defender sin alertas críticas</label></li></ul></div>
+      <div class="tool-card"><h2>Lista anti-phishing</h2><ul><li><label><input type="checkbox" /> Revisar remitente</label></li><li><label><input type="checkbox" /> Comprobar dominio</label></li><li><label><input type="checkbox" /> Evitar adjuntos inesperados</label></li><li><label><input type="checkbox" /> Confirmar solicitudes urgentes por otro canal</label></li></ul></div>
     </div>
   </div></section>
   <script>
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!#%+?';
+    const words = ['claro', 'luna', 'mapa', 'tecla', 'senda', 'rio', 'nube', 'foco', 'calma', 'piedra', 'bosque', 'farol'];
+    const pick = (list) => list[Math.floor(Math.random() * list.length)];
     document.querySelector('[data-generate]')?.addEventListener('click', () => {
-      document.querySelector('[data-password]').value = Array.from({ length: 18 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+      document.querySelector('[data-password]').value = Array.from({ length: 20 }, () => pick(chars)).join('');
+    });
+    document.querySelector('[data-passphrase]')?.addEventListener('click', () => {
+      document.querySelector('[data-passphrase-output]').value = Array.from({ length: 5 }, () => pick(words)).join('-') + '-' + Math.floor(10 + Math.random() * 90);
     });
     document.querySelector('[data-strength]')?.addEventListener('input', (event) => {
       const v = event.target.value;
-      const score = [v.length >= 12, /[A-Z]/.test(v), /[a-z]/.test(v), /\d/.test(v), /[^A-Za-z0-9]/.test(v)].filter(Boolean).length;
-      document.querySelector('[data-strength-result]').textContent = score >= 4 ? 'Fortaleza orientativa alta.' : score >= 3 ? 'Fortaleza orientativa media.' : 'Fortaleza orientativa baja.';
+      const score = [v.length >= 14, /[A-Z]/.test(v), /[a-z]/.test(v), /\d/.test(v), /[^A-Za-z0-9]/.test(v), !/(.)\1{2,}/.test(v)].filter(Boolean).length;
+      document.querySelector('[data-strength-result]').textContent = score >= 5 ? 'Fortaleza orientativa alta.' : score >= 3 ? 'Fortaleza orientativa media.' : 'Fortaleza orientativa baja.';
     });
     document.querySelector('[data-read-text]')?.addEventListener('input', (event) => {
       const words = event.target.value.trim().split(/\s+/).filter(Boolean).length;

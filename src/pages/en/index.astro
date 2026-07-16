@@ -8,6 +8,7 @@ const lang = 'en';
 const t = ui[lang];
 const articles = getArticles(lang);
 const featured = articles[0];
+const visualTopics = ['security', 'privacy', 'windows', 'software', 'business', 'wifi'];
 ---
 
 <DigiLayout lang={lang} title="Home" description={site.descriptions[lang]}>
@@ -33,7 +34,7 @@ const featured = articles[0];
 
   <section class="section"><div class="page-shell">
     <header class="section-header"><p class="eyebrow">Categories</p><h2>Main topics</h2></header>
-    <div class="grid grid-4">{Object.values(topics).slice(0, 8).map((topic) => <a class="card" href={withBase(`/en/${topic.en.slug}/`)}><h3>{topic.en.name}</h3><p>{topic.en.summary}</p></a>)}</div>
+    <div class="grid grid-3">{visualTopics.map((key) => <a class="card" href={withBase(`/en/${topics[key].en.slug}/`)}><h3>{topics[key].en.name}</h3><p>{topics[key].en.summary}</p></a>)}</div>
   </div></section>
 
   {[
@@ -55,5 +56,12 @@ const featured = articles[0];
     </div>
   </div></section>
 
-  <section class="section"><div class="page-shell"><div class="card"><h2>{t.subscribe}</h2><p>{t.subscribeText}</p></div></div></section>
+  <section class="section"><div class="page-shell">
+    <header class="section-header"><p class="eyebrow">{t.freeTools}</p><h2>Utilities that run in your browser</h2><p>They do not send passwords or text to servers.</p></header>
+    <div class="grid grid-3">
+      <a class="card" href={withBase('/en/tools/')}><h3>Password generator</h3><p>Create passwords and passphrases locally.</p></a>
+      <a class="card" href={withBase('/en/tools/')}><h3>Phishing checklist</h3><p>Review warning signs before opening links or attachments.</p></a>
+      <a class="card" href={withBase('/en/tools/')}><h3>Reading calculator</h3><p>Estimate reading time without sending text outside the browser.</p></a>
+    </div>
+  </div></section>
 </DigiLayout>

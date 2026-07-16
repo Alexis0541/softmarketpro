@@ -1,32 +1,26 @@
 # Revision antes de publicar DigiClara
 
-- [ ] Configurar dominio definitivo.
-- [ ] Configurar correo editorial.
-- [ ] Revisar datos legales.
-- [ ] Revisar traducciones ES.
-- [ ] Revisar traducciones EN.
-- [ ] Revisar privacidad.
-- [ ] Revisar cookies.
-- [ ] Revisar terminos.
-- [ ] Revisar formularios y activar backend solo si procede.
-- [ ] Revisar fechas.
-- [ ] Revisar autoria institucional.
-- [ ] Confirmar ausencia de datos inventados.
-- [ ] Confirmar ausencia de tienda.
-- [ ] Confirmar ausencia de marcas VPN promocionales no autorizadas.
-- [ ] Confirmar ausencia de enlaces afiliados.
-- [ ] Confirmar ausencia de azul oscuro predominante.
-- [ ] Revisar logo.
-- [ ] Revisar favicon.
-- [ ] Revisar Open Graph.
-- [ ] Revisar sitemap.
-- [ ] Revisar robots.
-- [ ] Revisar hreflang.
-- [ ] Revisar canonical.
-- [ ] Revisar enlaces.
-- [ ] Revisar movil.
-- [ ] Revisar accesibilidad.
-- [ ] Revisar rendimiento.
+- [ ] Confirmar dominio definitivo o mantener URL temporal de GitHub Pages.
+- [ ] Revisar canonical, sitemap, robots y Open Graph.
+- [ ] Revisar aviso legal, privacidad, cookies, terminos, afiliados, politica editorial, metodologia y correcciones.
+- [ ] Confirmar responsable: Alexis Moncada.
+- [ ] Confirmar pais: Espana.
+- [ ] Confirmar correo: digiclara000@gmail.com.
+- [ ] Revisar ortografia ES y EN.
+- [ ] Revisar traducciones completas.
+- [ ] Revisar enlaces internos y externos.
+- [ ] Revisar fuentes reales en articulos.
+- [ ] Revisar creditos de imagenes en `media-credits.json`.
+- [ ] Confirmar ausencia de boletin.
+- [ ] Confirmar ausencia de redes sociales ficticias.
+- [ ] Confirmar ausencia de seccion Noticias visible.
+- [ ] Confirmar ausencia de marcas VPN promocionales.
+- [ ] Confirmar ausencia de enlaces afiliados activos.
+- [ ] Confirmar ausencia de tienda, carrito, checkout, productos, precios y licencias.
+- [ ] Confirmar que cada articulo tiene imagen unica.
+- [ ] Confirmar que ningun articulo usa `digiclara-og.svg` como portada.
+- [ ] Revisar herramientas locales.
 - [ ] Revisar 404.
-- [ ] Revisar ortografia ES.
-- [ ] Revisar ortografia EN.
+- [ ] Revisar movil, accesibilidad, contraste y foco.
+- [ ] Ejecutar `npm run validate`.
+- [ ] Ejecutar `npm run build`.

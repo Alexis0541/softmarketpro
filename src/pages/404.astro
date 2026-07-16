@@ -1,12 +1,20 @@
 ---
 import DigiLayout from '~/layouts/DigiLayout.astro';
+import { topics } from '~/data/digiclara';
 import { withBase } from '~/utils/paths';
 ---
 <DigiLayout lang="es" title="Pagina no encontrada" description="La pagina solicitada no existe en DigiClara." noindex={true}>
   <section class="section"><div class="page-shell article-body">
     <p class="eyebrow">404</p>
     <h1>Pagina no encontrada</h1>
-    <p>Puede que el contenido haya cambiado de ruta durante la transformacion editorial de DigiClara.</p>
+    <p>Puede que el contenido haya cambiado de ruta. Puedes volver al inicio, buscar una guia o entrar en una categoria principal.</p>
+    <form class="search-form" action={withBase('/es/buscar/')}>
+      <label class="sr-only" for="not-found-search">Buscar</label>
+      <input id="not-found-search" name="q" type="search" placeholder="Buscar en DigiClara" />
+    </form>
     <div class="button-row"><a class="button primary" href={withBase('/es/')}>Ir al inicio</a><a class="button" href={withBase('/en/')}>English home</a></div>
+    <div class="grid grid-3">
+      {(['security', 'privacy', 'windows'] as const).map((key) => <a class="card" href={withBase(`/es/${topics[key].es.slug}/`)}><h2>{topics[key].es.name}</h2><p>{topics[key].es.summary}</p></a>)}
+    </div>
   </div></section>
 </DigiLayout>

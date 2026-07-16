@@ -8,6 +8,7 @@ const lang = 'es';
 const t = ui[lang];
 const articles = getArticles(lang);
 const featured = articles[0];
+const visualTopics = ['security', 'privacy', 'windows', 'software', 'business', 'wifi'];
 ---
 
 <DigiLayout lang={lang} title="Inicio" description={site.descriptions[lang]}>
@@ -33,7 +34,7 @@ const featured = articles[0];
 
   <section class="section"><div class="page-shell">
     <header class="section-header"><p class="eyebrow">Categorias</p><h2>Temas principales</h2></header>
-    <div class="grid grid-4">{Object.values(topics).slice(0, 8).map((topic) => <a class="card" href={withBase(`/es/${topic.es.slug}/`)}><h3>{topic.es.name}</h3><p>{topic.es.summary}</p></a>)}</div>
+    <div class="grid grid-3">{visualTopics.map((key) => <a class="card" href={withBase(`/es/${topics[key].es.slug}/`)}><h3>{topics[key].es.name}</h3><p>{topics[key].es.summary}</p></a>)}</div>
   </div></section>
 
   {[
@@ -55,5 +56,12 @@ const featured = articles[0];
     </div>
   </div></section>
 
-  <section class="section"><div class="page-shell"><div class="card"><h2>{t.subscribe}</h2><p>{t.subscribeText}</p></div></div></section>
+  <section class="section"><div class="page-shell">
+    <header class="section-header"><p class="eyebrow">{t.freeTools}</p><h2>Utilidades que funcionan en tu navegador</h2><p>No envian contrasenas ni textos a servidores.</p></header>
+    <div class="grid grid-3">
+      <a class="card" href={withBase('/es/herramientas/')}><h3>Generador de contrasenas</h3><p>Crea claves y frases de contrasena de forma local.</p></a>
+      <a class="card" href={withBase('/es/herramientas/')}><h3>Checklist de phishing</h3><p>Revisa senales antes de abrir enlaces o adjuntos.</p></a>
+      <a class="card" href={withBase('/es/herramientas/')}><h3>Calculadora de lectura</h3><p>Estima tiempo de lectura sin enviar el texto fuera del navegador.</p></a>
+    </div>
+  </div></section>
 </DigiLayout>

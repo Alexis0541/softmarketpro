@@ -20,8 +20,6 @@ metadata:
         height: 630
     type: website
   twitter:
-    handle: '@digiclara'
-    site: '@digiclara'
     cardType: summary_large_image
 
 i18n:
@@ -29,7 +27,7 @@ i18n:
   textDirection: ltr
 
 contact:
-  email: ''
+  email: 'digiclara000@gmail.com'
 
 editorial:
   affiliateEnabled: false

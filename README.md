@@ -1,88 +1,80 @@
 # DigiClara
 
-DigiClara es un blog editorial bilingue sobre software, privacidad digital, ciberseguridad, Windows, redes, copias de seguridad y tecnologia practica.
+DigiClara es un blog editorial bilingue sobre ciberseguridad, privacidad, Windows, redes, software seguro y herramientas digitales. El sitio esta preparado para GitHub Pages y se publica temporalmente en:
 
-El proyecto esta preparado para publicarse en GitHub Pages mediante GitHub Actions.
+https://alexis0541.github.io/softmarketpro/
 
-## Estructura bilingue
+Responsable editorial: Alexis Moncada  
+Pais: Espana  
+Contacto: digiclara000@gmail.com
+
+## Estructura
 
 - Espanol: `/es/`
 - Ingles: `/en/`
 - Articulos ES: `/es/articulos/[slug]/`
 - Articles EN: `/en/articles/[slug]/`
-- Herramientas ES: `/es/herramientas/`
-- Tools EN: `/en/tools/`
-- Legal ES/EN: `/es/legal/` y `/en/legal/`
+- Herramientas: `/es/herramientas/` y `/en/tools/`
+- Legal: `/es/legal/` y `/en/legal/`
 
-## Ejecutar localmente
+## Comandos
 
 ```bash
 npm install
 npm run dev
-```
-
-## Compilar
-
-```bash
+npm run validate
 npm run build
 ```
 
-## Publicar en GitHub Pages
+`npm run validate` revisa patrones prohibidos, slugs duplicados, imagenes de articulos faltantes y creditos multimedia.
 
-1. Sube los cambios a `main`.
-2. En GitHub Pages, usa `GitHub Actions`.
-3. El workflow `.github/workflows/deploy.yml` genera `dist/` y lo publica.
+## Configuracion central
 
-## Crear articulos
+Los datos principales viven en `src/data/digiclara.ts`:
 
-Los articulos estan centralizados en `src/data/digiclara.ts`.
+- Nombre del sitio.
+- URL temporal.
+- Correo.
+- Responsable.
+- Pais.
+- Idiomas.
+- Estado de afiliacion, boletin, redes y noticias.
+- Categorias.
+- Articulos.
+- Paginas legales.
 
-Para agregar un articulo:
+Para cambiar el dominio en el futuro, actualiza la configuracion del sitio y revisa canonical, sitemap, robots y Open Graph con el build.
 
-1. Agrega una entrada en `articleSeeds`.
-2. Incluye version en espanol e ingles.
-3. Asigna categoria, etiquetas, resumen, fecha y texto alternativo.
-4. Verifica que la ruta aparezca en el buscador.
+## Crear un articulo
 
-## Traducir contenido
+1. Anadir el par ES/EN en `src/data/digiclara.ts`.
+2. Usar un slug unico.
+3. Asignar categoria, etiquetas, autor y fechas.
+4. Crear una imagen local unica en `public/assets/images/articles/`.
+5. Registrar credito en `public/assets/media-credits.json`.
+6. Incluir fuentes reales con URL.
+7. Ejecutar `npm run validate` y `npm run build`.
 
-Cada articulo debe tener equivalente completo en ambos idiomas. No publiques paginas parcialmente traducidas.
+No se debe publicar un articulo que use `digiclara-og.svg` como portada.
 
-## Categorias
+## Afiliados y marcas
 
-Las categorias estan en `topics` dentro de `src/data/digiclara.ts`.
+`affiliateEnabled` esta en `false`. No hay enlaces afiliados activos. Si se activan en el futuro, deben identificarse de forma visible, sin afirmar asociaciones inexistentes y sin condicionar conclusiones editoriales.
 
-## Buscador
+## Herramientas
 
-El buscador es frontend y funciona con los datos de articulos ya incluidos en la build. Busca titulo, resumen, categoria y etiquetas.
+Las herramientas funcionan localmente en el navegador. No envian contrasenas ni textos a servidores. Son educativas y no sustituyen una auditoria.
 
-## Contacto
+## Publicacion
 
-El formulario esta desactivado para envio real. Para activarlo, configura un proveedor como Formspree, Netlify Forms u otra solucion y actualiza la nota legal.
+El workflow `.github/workflows/deploy.yml` instala dependencias, configura el `base` de GitHub Pages, construye Astro y despliega el contenido de `dist`.
 
-## Logo y colores
+## Revision editorial
 
-Los recursos de marca estan en `public/assets/`.
+Antes de publicar cambios importantes, revisar:
 
-Paleta principal:
-
-- Marfil: `#F7F3EA`
-- Blanco calido: `#FFFDF8`
-- Carbon: `#242421`
-- Terracota: `#C7613F`
-- Verde salvia: `#71806A`
-- Mostaza suave: `#D5A63A`
-- Beige grisaceo: `#DDD6C9`
-- Grafito: `#2B2A27`
-
-## Afiliados
-
-La configuracion editorial mantiene `affiliateEnabled: false`. No se muestran promociones ni enlaces de afiliado en esta version.
-
-## Revisiones recomendadas
-
-- Revisar enlaces internos.
-- Revisar contraste y navegacion por teclado.
-- Revisar responsive en movil y tablet.
-- Completar correo editorial antes de activar formularios.
-- Revisar politicas legales antes de uso comercial.
+- `PLAN-EDITORIAL.md`
+- `REVISION-ANTES-DE-PUBLICAR.md`
+- `public/assets/media-credits.json`
+- Resultado de `npm run validate`
+- Resultado de `npm run build`

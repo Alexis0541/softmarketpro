@@ -1,20 +1,19 @@
 ---
 import DigiLayout from '~/layouts/DigiLayout.astro';
-import { ui } from '~/data/digiclara';
-const t = ui.en;
+import { site } from '~/data/digiclara';
 ---
-<DigiLayout lang="en" title="Contact" description="DigiClara editorial contact form.">
+<DigiLayout lang="en" title="Contact" description="DigiClara editorial contact.">
   <section class="section"><div class="page-shell article-body">
-    <h1>Editorial contact</h1><p>{t.contactNote}</p>
-    <form data-contact-form>
-      <label>Name<input required name="name" /></label>
-      <label>Email<input required type="email" name="email" /></label>
-      <label>Subject<input required name="subject" /></label>
-      <label>Inquiry type<select><option>Content correction</option><option>Suggestion</option><option>Technical issue</option><option>Editorial inquiry</option><option>Collaboration</option><option>Other</option></select></label>
-      <label>Message<textarea required rows="6"></textarea></label>
-      <label><input required type="checkbox" /> I agree that these details may be used to answer my request when the form is configured.</label>
-      <button class="button primary" type="submit">Validate form</button>
-    </form>
+    <p class="eyebrow">Contact</p>
+    <h1>Editorial contact</h1>
+    <p>DigiClara is editorially managed by {site.ownerName}. The site is run from Spain and handles corrections, suggestions, technical issues and editorial proposals by email.</p>
+    <div class="notice sage">
+      <h2>Contact details</h2>
+      <p><strong>Owner:</strong> {site.ownerName}</p>
+      <p><strong>Role:</strong> DigiClara editorial lead</p>
+      <p><strong>Country:</strong> Spain</p>
+      <p><strong>Email:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+    <a class="button primary" href={`mailto:${site.email}?subject=Inquiry%20from%20DigiClara`}>Send an email</a>
   </div></section>
-  <script>document.querySelector('[data-contact-form]')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Form validated. No information is sent because no backend is configured.'); });</script>
 </DigiLayout>

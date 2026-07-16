@@ -12,7 +12,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "validate": "node scripts/validate-site.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

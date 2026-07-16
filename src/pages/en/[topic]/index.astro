@@ -4,7 +4,7 @@ import ArticleCard from '~/components/dc/ArticleCard.astro';
 import { getTopicArticles, getTopicBySlug, topics } from '~/data/digiclara';
 
 export function getStaticPaths() {
-  return Object.values(topics).map((topic) => ({ params: { topic: topic.en.slug } }));
+  return Object.entries(topics).filter(([key]) => key !== 'tools').map(([, topic]) => ({ params: { topic: topic.en.slug } }));
 }
 const lang = 'en';
 const key = getTopicBySlug(lang, Astro.params.topic || '');

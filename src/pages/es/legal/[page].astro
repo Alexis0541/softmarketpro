@@ -1,15 +1,28 @@
 ---
 import DigiLayout from '~/layouts/DigiLayout.astro';
-import { legalPages } from '~/data/digiclara';
+import { legalPages, site } from '~/data/digiclara';
 export function getStaticPaths() { return Object.values(legalPages).map((p) => ({ params: { page: p.es[0] } })); }
-const page = Object.values(legalPages).find((p) => p.es[0] === Astro.params.page)?.es;
-if (!page) return Astro.redirect('/es/');
+const entry = Object.entries(legalPages).find(([, p]) => p.es[0] === Astro.params.page);
+if (!entry) return Astro.redirect('/es/');
+const [kind, page] = [entry[0], entry[1].es];
+const common = [
+  ['Responsable', [`Responsable editorial: ${site.ownerName}. Pais: ${site.country}. Correo de contacto: ${site.email}.`]],
+  ['Alcance', ['DigiClara publica contenido educativo sobre tecnologia, ciberseguridad, privacidad y software seguro. La informacion no sustituye asesoramiento legal, tecnico o profesional adaptado a un caso concreto.']],
+];
+const sections = {
+  legal: [...common, ['Identificacion', ['DigiClara no declara empresa, oficina, telefono, NIF o CIF porque esos datos no se han aportado para esta version. Si fueran obligatorios en el futuro, deberan revisarse antes de publicar cambios comerciales.']]],
+  privacy: [...common, ['Datos tratados', ['El sitio no tiene formulario de contacto ni boletin. El contacto se realiza mediante mailto, por lo que el correo se gestiona en el cliente de correo del visitante y en la cuenta receptora indicada.']], ['Herramientas locales', ['Las herramientas de contrasenas, checklist y lectura se ejecutan en el navegador. No envian contrasenas ni textos a servidores de DigiClara.']]],
+  cookies: [...common, ['Cookies y almacenamiento', ['Esta version no incluye analitica, publicidad ni perfiles sociales. Puede usarse almacenamiento local solo para funciones de interfaz si se implementan preferencias visuales.']]],
+  terms: [...common, ['Uso del contenido', ['Puedes consultar el contenido con fines informativos. No se permite presentarlo como asesoramiento profesional personalizado ni usarlo para actividades ilicitas.']]],
+  affiliates: [...common, ['Estado actual', ['DigiClara no usa enlaces afiliados actualmente. Si se activan en el futuro, deberan identificarse de forma clara y no determinar las conclusiones editoriales.']]],
+  editorial: [...common, ['Criterios editoriales', ['Los temas se eligen por utilidad para usuarios y pequenas empresas. Se separan hechos, recomendaciones y opiniones, y se evita afirmar pruebas que no se hayan realizado.']], ['Uso de IA', ['La IA puede ayudar a estructurar borradores o revisar claridad, pero el contenido debe tener revision humana y fuentes verificables antes de publicarse.']]],
+  methodology: [...common, ['Tipos de contenido', ['Guia documental: explica conceptos con fuentes. Tutorial practico: indica pasos verificables. Comparativa documental: contrasta criterios publicos. Prueba practica: solo se usa cuando se ha probado realmente.']]],
+  corrections: [...common, ['Como reportar errores', [`Envia un correo a ${site.email} con la URL, el fragmento afectado y la correccion propuesta. Los cambios importantes actualizaran la fecha visible del contenido.`]]],
+}[kind];
 ---
 <DigiLayout lang="es" title={page[1]} description={page[2]}>
   <section class="section"><div class="page-shell article-body">
     <h1>{page[1]}</h1><p>{page[2]}</p>
-    <h2>Alcance</h2><p>Esta pagina describe el funcionamiento editorial actual de DigiClara. No sustituye asesoramiento legal profesional.</p>
-    <h2>Datos pendientes</h2><p>Antes de publicar una version comercial, se debe completar correo de contacto, responsable legal y cualquier requisito local aplicable.</p>
-    <h2>Compromiso</h2><p>No se usan promociones ocultas, no se afirman pruebas no realizadas y no se recopilan datos sensibles desde herramientas locales.</p>
+    {sections.map(([heading, paragraphs]) => <section><h2>{heading}</h2>{paragraphs.map((paragraph) => <p>{paragraph}</p>)}</section>)}
   </div></section>
 </DigiLayout>

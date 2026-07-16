@@ -26,7 +26,7 @@ const legal = Object.values(legalPages).map((page) => ({ slug: page[lang][0], ti
     </div>
     <div>
       <h2>{lang === 'es' ? 'Contacto' : 'Contact'}</h2>
-      <p>{lang === 'es' ? 'El correo editorial se debe completar antes de activar formularios.' : 'The editorial email must be completed before enabling forms.'}</p>
+      <p>{lang === 'es' ? `Responsable editorial: ${site.ownerName}. Contacto: ${site.email}.` : `Editorial lead: ${site.ownerName}. Contact: ${site.email}.`}</p>
       <a href={withBase(`/${lang}/${lang === 'es' ? 'contacto' : 'contact'}/`)}>{lang === 'es' ? 'Pagina de contacto' : 'Contact page'}</a>
     </div>
   </div>
