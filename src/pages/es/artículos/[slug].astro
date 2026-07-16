@@ -1,0 +1,9 @@
+---
+import RedirectPage from '~/components/dc/RedirectPage.astro';
+import { getArticles } from '~/data/digiclara';
+export function getStaticPaths() {
+  return getArticles('es').map((article) => ({ params: { slug: article.slug }, props: { slug: article.slug } }));
+}
+const { slug } = Astro.props;
+---
+<RedirectPage title="Articulo movido" to={`/es/articulos/${slug}/`} />

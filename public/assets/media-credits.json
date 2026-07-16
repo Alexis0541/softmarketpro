@@ -158,5 +158,21 @@
         "license":  "Unsplash License",
         "source":  "https://unsplash.com/photos/person-holding-silver-iphone-6-3uKEDMU5J7k",
         "notes":  "Downloaded locally from Unsplash; attribution appreciated, not required by license."
+    },
+    {
+        "file":  "/assets/images/articles/proteger-cuenta-microsoft.jpg",
+        "title":  "proteger-cuenta-microsoft",
+        "creator":  "Dan Nelson",
+        "license":  "Unsplash License",
+        "source":  "https://unsplash.com/photos/person-using-macbook-pro-on-white-table-AvSFPw5Tp68",
+        "notes":  "Downloaded locally from Unsplash; reused for Microsoft account security article."
+    },
+    {
+        "file":  "/assets/images/articles/copia-local-nube.jpg",
+        "title":  "copia-local-nube",
+        "creator":  "Curated Lifestyle",
+        "license":  "Unsplash License",
+        "source":  "https://unsplash.com/photos/hand-with-tattoo-connect-a-external-hdd-cable-to-laptop-PkOIQQ9O3Gk",
+        "notes":  "Downloaded locally from Unsplash; reused for backup comparison article."
     }
 ]

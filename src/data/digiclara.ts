@@ -118,7 +118,7 @@ export const topics: Record<TopicKey, { es: { slug: string; name: string; summar
     en: { slug: 'software', name: 'Software', summary: 'Safe software choices, updates, permissions and trustworthy downloads.' },
   },
   guides: {
-    es: { slug: 'guías', name: 'Guías', summary: 'Tutoriales claros para aplicar medidas concretas sin lenguaje innecesariamente técnico.' },
+    es: { slug: 'guias', name: 'Guías', summary: 'Tutoriales claros para aplicar medidas concretas sin lenguaje innecesariamente técnico.' },
     en: { slug: 'guides', name: 'Guides', summary: 'Clear tutorials for applying concrete measures without unnecessary technical language.' },
   },
   comparisons: {
@@ -130,7 +130,7 @@ export const topics: Record<TopicKey, { es: { slug: string; name: string; summar
     en: { slug: 'tools', name: 'Tools', summary: 'Local utilities that run in the browser and do not send passwords to servers.' },
   },
   business: {
-    es: { slug: 'pequeñas-empresas', name: 'Pequeñas empresas', summary: 'Medidas realistas para equipos pequenos: cuentas, copias, accesos, formacion y respuesta.' },
+    es: { slug: 'pequenas-empresas', name: 'Pequeñas empresas', summary: 'Medidas realistas para equipos pequenos: cuentas, copias, accesos, formacion y respuesta.' },
     en: { slug: 'small-business', name: 'Small business', summary: 'Realistic measures for small teams: accounts, backups, access, training and response.' },
   },
   wifi: {
@@ -156,7 +156,7 @@ export const langPath = (lang: Lang, path = '/') => {
   return `/${lang}${clean ? `/${clean}` : ''}/`;
 };
 
-export const articlePath = (lang: Lang, slug: string) => `${langPath(lang, lang === 'es' ? 'artículos' : 'articles')}${slug}/`;
+export const articlePath = (lang: Lang, slug: string) => `${langPath(lang, lang === 'es' ? 'articulos' : 'articles')}${slug}/`;
 
 const sourceSets = {
   phishing: [
@@ -180,7 +180,7 @@ const sourceSets = {
     { label: 'Microsoft Support - Backup and restore', url: 'https://support.microsoft.com/windows/backup-and-restore-in-windows' },
   ],
   privacy: [
-    { label: 'AEPD - Guías y herramientas', url: 'https://www.aepd.es/guías-y-herramientas' },
+    { label: 'AEPD - Guías y herramientas', url: 'https://www.aepd.es/guias-y-herramientas' },
     { label: 'EDPB - Guidelines and recommendations', url: 'https://www.edpb.europa.eu/our-work-tools/general-guidance/guidelines-recommendations-best-practices_en' },
     { label: 'FTC - Online privacy and security', url: 'https://consumer.ftc.gov/identity-theft-and-online-security/online-privacy-and-security' },
   ],
@@ -244,6 +244,8 @@ const defs = [
   ['seguridad-pequena-empresa', 'business', 'guides', ['Pequeñas empresas', 'Cuentas'], sourceSets.phishing, 'Seguridad básica para pequeñas empresas sin equipo técnico', 'Basic security for small businesses without an IT team', 'Medidas realistas para cuentas, copias, accesos y respuesta inicial.', 'Realistic measures for accounts, backups, access and initial response.', 'Ilustración de una pequeña empresa con capas básicas de seguridad.', 'Illustration of a small business with basic security layers.', false],
   ['router-casa-seguro', 'wifi', 'guides', ['Router', 'Wi-Fi'], sourceSets.vpn, 'Ajustes básicos para proteger el router de casa', 'Basic settings to protect your home router', 'Cambios sencillos para mejorar la red doméstica sin complicarla.', 'Simple changes to improve the home network without overcomplicating it.', 'Ilustración de un router doméstico con configuración segura.', 'Illustration of a home router with safer settings.', false],
   ['permisos-aplicaciones', 'privacy', 'guides', ['Permisos', 'Aplicaciones'], sourceSets.privacy, 'Cómo revisar permisos de aplicaciones sin volverse paranoico', 'How to review app permissions without becoming paranoid', 'Criterios para conceder, retirar y revisar permisos con sentido común.', 'Criteria for granting, removing and reviewing permissions with common sense.', 'Ilustración de permisos de aplicaciones organizados por sensibilidad.', 'Illustration of app permissions organised by sensitivity.', false],
+  ['proteger-cuenta-microsoft', 'windows', 'guides', ['Microsoft', 'Cuentas', 'Autenticación'], sourceSets.windows, 'Cómo proteger una cuenta de Microsoft', 'How to protect a Microsoft account', 'Ajustes clave para reducir accesos no autorizados y recuperar la cuenta con menos riesgo.', 'Key settings to reduce unauthorised access and recover the account with less risk.', 'Fotografía de un portátil usado para revisar la seguridad de una cuenta Microsoft.', 'Photo of a laptop used to review Microsoft account security.', false],
+  ['copia-local-nube', 'comparisons', 'comparisons', ['Copias de seguridad', 'Nube', 'Recuperación'], sourceSets.backup, 'Copia local frente a copia en la nube', 'Local backup vs cloud backup', 'Diferencias prácticas para elegir dónde guardar tus copias de seguridad.', 'Practical differences for choosing where to store backups.', 'Fotografía de un disco externo conectado a un portátil para comparar copias locales y nube.', 'Photo of an external drive connected to a laptop for comparing local and cloud backups.', false],
 ] as const;
 
 const conclusion = (title: string, lang: Lang) =>
@@ -307,15 +309,15 @@ export const legalPages = {
     en: ['legal-notice', 'Legal notice', 'Editorial identification for DigiClara, owner, country and contact.'],
   },
   privacy: {
-    es: ['política-de-privacidad', 'Política de privacidad', 'Qué datos trata DigiClara, como funciona el contacto por correo y que derechos puedes ejercer.'],
+    es: ['politica-de-privacidad', 'Política de privacidad', 'Qué datos trata DigiClara, como funciona el contacto por correo y que derechos puedes ejercer.'],
     en: ['privacy-policy', 'Privacy policy', 'What data DigiClara processes, how email contact works and what rights you can exercise.'],
   },
   cookies: {
-    es: ['política-de-cookies', 'Política de cookies', 'Uso real de cookies y almacenamiento local en esta version del sitio.'],
+    es: ['politica-de-cookies', 'Política de cookies', 'Uso real de cookies y almacenamiento local en esta version del sitio.'],
     en: ['cookie-policy', 'Cookie policy', 'Actual use of cookies and local storage in this version of the site.'],
   },
   terms: {
-    es: ['términos-de-uso', 'Términos de uso', 'Condiciones generales para consultar contenido educativo publicado por DigiClara.'],
+    es: ['terminos-de-uso', 'Términos de uso', 'Condiciones generales para consultar contenido educativo publicado por DigiClara.'],
     en: ['terms-of-use', 'Terms of use', 'General conditions for reading educational content published by DigiClara.'],
   },
   affiliates: {
@@ -323,7 +325,7 @@ export const legalPages = {
     en: ['affiliate-disclosure', 'Affiliate disclosure', 'DigiClara does not currently use affiliate links; this policy explains how they would be identified in the future.'],
   },
   editorial: {
-    es: ['política-editorial', 'Política editorial', 'Criterios de investigación, revisión, fuentes, independencia y uso responsable de IA.'],
+    es: ['politica-editorial', 'Política editorial', 'Criterios de investigación, revisión, fuentes, independencia y uso responsable de IA.'],
     en: ['editorial-policy', 'Editorial policy', 'Research, review, sourcing, independence and responsible AI criteria.'],
   },
   methodology: {
@@ -331,7 +333,7 @@ export const legalPages = {
     en: ['methodology', 'Methodology', 'Difference between guides, documentary comparisons and practical tests that were actually performed.'],
   },
   corrections: {
-    es: ['política-de-correcciones', 'Política de correcciones', 'Cómo reportar errores, como se revisan y como se actualizan los contenidos.'],
+    es: ['politica-de-correcciones', 'Política de correcciones', 'Cómo reportar errores, como se revisan y como se actualizan los contenidos.'],
     en: ['corrections-policy', 'Corrections policy', 'How to report errors, how they are reviewed and how content is updated.'],
   },
 } as const;

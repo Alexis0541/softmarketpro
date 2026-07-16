@@ -1,0 +1,27 @@
+---
+import { withBase } from '~/utils/paths';
+
+interface Props {
+  title?: string;
+  to: string;
+}
+const { title = 'Redireccion', to } = Astro.props;
+const target = withBase(to);
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href={target} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>{title} | DigiClara</title>
+  </head>
+  <body>
+    <main>
+      <h1>{title}</h1>
+      <p>Esta pagina se ha movido.</p>
+      <p><a href={target}>Ir a la nueva direccion</a></p>
+    </main>
+  </body>
+</html>
