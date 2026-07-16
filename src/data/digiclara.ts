@@ -239,6 +239,18 @@ const sourceSets = {
     { label: 'ENISA - Artificial Intelligence and Next Gen Technologies', url: 'https://www.enisa.europa.eu/topics/artificial-intelligence-and-next-gen-technologies' },
     { label: 'OpenAI Privacy Center', url: 'https://privacy.openai.com/' },
   ],
+  accountTakeover: [
+    { label: 'NIST SP 800-63B-4 - Authentication and Authenticator Management', url: 'https://pages.nist.gov/800-63-4/sp800-63b.html' },
+    { label: 'CISA - Implementing Phishing-Resistant MFA', url: 'https://www.cisa.gov/sites/default/files/publications/fact-sheet-implementing-phishing-resistant-mfa-508c.pdf' },
+    { label: 'OWASP - Session Management Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html' },
+    { label: 'OWASP - Cookie Theft Mitigation Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Cookie_Theft_Mitigation_Cheat_Sheet.html' },
+  ],
+  incidentSessions: [
+    { label: 'OWASP - Cookie Theft Mitigation Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Cookie_Theft_Mitigation_Cheat_Sheet.html' },
+    { label: 'Microsoft Support - See devices signed in to your account', url: 'https://support.microsoft.com/en-us/account-billing/how-to-see-devices-that-are-signed-in-to-your-microsoft-account-7f407a09-7d9a-4a6c-a8a6-9c2753e5e6f0' },
+    { label: 'Google Account Help - See devices with account access', url: 'https://support.google.com/accounts/answer/3067630' },
+    { label: 'CISA - Secure our World: Use Strong Passwords', url: 'https://www.cisa.gov/secure-our-world/use-strong-passwords' },
+  ],
   software: [
     { label: 'CISA - Update software', url: 'https://www.cisa.gov/secure-our-world/update-software' },
     { label: 'NCSC - Install latest updates', url: 'https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online/install-the-latest-software-and-app-updates' },
@@ -274,6 +286,9 @@ const defs = [
   ['permisos-extension-navegador', 'software', 'guides', ['Navegador', 'Extensiones', 'Permisos'], sourceSets.browserExtensions, 'Extensiones del navegador: permisos que conviene revisar', 'Browser extensions: permissions worth reviewing', 'Qué significan los permisos de extensiones y cómo limpiar el navegador sin perder productividad.', 'What extension permissions mean and how to clean your browser without losing productivity.', 'Fotografía real de una pantalla de ordenador usada para trabajo digital.', 'Real photo of a computer screen used for digital work.', false],
   ['compartir-archivos-nube', 'privacy', 'guides', ['Nube', 'Permisos', 'Archivos'], sourceSets.cloudSharing, 'Compartir archivos en la nube sin exponerlos de más', 'Sharing cloud files without overexposing them', 'Diferencias entre enlaces, usuarios concretos, permisos de edición y revisiones de acceso.', 'Differences between links, named users, edit permissions and access reviews.', 'Fotografía real de un disco externo conectado a un portátil.', 'Real photo of an external drive connected to a laptop.', false],
   ['privacidad-ia-generativa', 'privacy', 'guides', ['IA', 'Privacidad', 'Datos'], sourceSets.aiPrivacy, 'Privacidad al usar IA generativa: qué no deberías pegar en un prompt', 'Privacy when using generative AI: what not to paste into a prompt', 'Criterios para usar asistentes de IA con documentos, datos personales, memoria, historial y controles.', 'Criteria for using AI assistants with documents, personal data, memory, history and controls.', 'Imagen real/conceptual relacionada con inteligencia artificial y datos.', 'Real/conceptual image related to artificial intelligence and data.', false],
+  ['robo-cuenta-con-2fa', 'security', 'guides', ['2FA', 'Passkeys', 'Sesiones'], sourceSets.accountTakeover, 'Cómo pueden robar una cuenta aunque tenga autenticación en dos pasos', 'How an account can be stolen even with two-factor authentication', 'El 2FA reduce mucho el riesgo, pero no cubre robo de sesiones, phishing en tiempo real, fatiga MFA ni recuperación débil.', '2FA greatly reduces risk, but it does not cover session theft, real-time phishing, MFA fatigue or weak recovery.', 'Pantalla relacionada con autenticación y seguridad de cuenta.', 'Screen related to authentication and account security.', false],
+  ['secuestro-sesion-cookies', 'security', 'guides', ['Cookies', 'Sesiones', 'Navegador'], sourceSets.accountTakeover, 'Qué es el secuestro de sesión y cómo funcionan las cookies de acceso', 'What session hijacking is and how access cookies work', 'Explicación clara de cookies de sesión, tokens, robo de identificadores y señales de reutilización sospechosa.', 'A clear explanation of session cookies, tokens, stolen identifiers and suspicious reuse signals.', 'Portátil con configuración de seguridad en pantalla.', 'Laptop with security settings on screen.', false],
+  ['cerrar-sesiones-robadas', 'security', 'guides', ['Incidentes', 'Malware', 'Sesiones'], sourceSets.incidentSessions, 'Cómo cerrar sesiones robadas después de una infección', 'How to close stolen sessions after an infection', 'Pasos para recuperar cuentas después de sospechar robo de cookies, tokens o sesiones de navegador.', 'Steps to recover accounts after suspected cookie, token or browser session theft.', 'Portátil usado para revisar seguridad y cerrar sesiones activas.', 'Laptop used to review security and close active sessions.', false],
 ] as const;
 
 const readingTime = (body: ArticleBodyBase) =>

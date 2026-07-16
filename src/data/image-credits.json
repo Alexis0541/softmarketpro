@@ -214,5 +214,29 @@
         "notes":  "Downloaded locally from Wikimedia Commons for the generative AI privacy article.",
         "title":  "privacidad-ia-generativa",
         "file":  "/assets/images/articles/privacidad-ia-generativa.jpg"
+    },
+    {
+        "creator":  "Ed Hardie",
+        "source":  "https://unsplash.com/photos/a-screenshot-of-a-phone-RMIsZlv8qv4",
+        "license":  "Unsplash License",
+        "notes":  "Downloaded locally from Unsplash for the two-factor account takeover article.",
+        "title":  "robo-cuenta-con-2fa",
+        "file":  "/assets/images/articles/robo-cuenta-con-2fa.jpg"
+    },
+    {
+        "creator":  "Ed Hardie",
+        "source":  "https://unsplash.com/photos/the-screen-of-a-laptop-with-the-windows-security-button-highlighted-Y5PSyMm8nMk",
+        "license":  "Unsplash License",
+        "notes":  "Downloaded locally from Unsplash for the session hijacking article.",
+        "title":  "secuestro-sesion-cookies",
+        "file":  "/assets/images/articles/secuestro-sesion-cookies.jpg"
+    },
+    {
+        "creator":  "Ed Hardie",
+        "source":  "https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-table-p0vN2xCvJNg",
+        "license":  "Unsplash License",
+        "notes":  "Downloaded locally from Unsplash for the stolen sessions recovery article.",
+        "title":  "cerrar-sesiones-robadas",
+        "file":  "/assets/images/articles/cerrar-sesiones-robadas.jpg"
     }
 ]
