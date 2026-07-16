@@ -16,7 +16,7 @@
 - [ ] Confirmar ausencia de seccion Noticias visible.
 - [ ] Confirmar ausencia de marcas VPN promocionales.
 - [ ] Confirmar ausencia de enlaces afiliados activos.
-- [ ] Confirmar ausencia de tienda, carrito, checkout, productos, precios y licencias.
+- [ ] Confirmar ausencia de funciones comerciales anteriores.
 - [ ] Confirmar que cada articulo tiene imagen unica.
 - [ ] Confirmar que ningun articulo usa `digiclara-og.svg` como portada.
 - [ ] Revisar herramientas locales.

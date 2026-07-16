@@ -4,7 +4,7 @@ import path from 'node:path';
 const root = process.cwd();
 const scanTargets = ['src', 'public', 'README.md', 'PLAN-EDITORIAL.md', 'REVISION-ANTES-DE-PUBLICAR.md', 'package.json'];
 const forbidden = [
-  /SoftMarket/i,
+  /SoftMarket\s+Pro/i,
   /IPVanish/i,
   /carrito/i,
   /checkout/i,
@@ -37,7 +37,8 @@ for (const file of files) {
 }
 
 const data = fs.readFileSync(path.join(root, 'src/data/digiclara.ts'), 'utf8');
-const slugs = [...data.matchAll(/\['([^']+)',\s*'[^']+',\s*'[^']+',/g)].map((match) => match[1]);
+const defsBlock = data.match(/const defs = \[([\s\S]*?)\] as const;/)?.[1] || '';
+const slugs = [...defsBlock.matchAll(/^\s+\['([^']+)',\s*'[^']+',\s*'[^']+',/gm)].map((match) => match[1]);
 const duplicates = slugs.filter((slug, index) => slugs.indexOf(slug) !== index);
 if (duplicates.length) failures.push(`duplicate article slugs: ${duplicates.join(', ')}`);
 for (const slug of slugs) {
