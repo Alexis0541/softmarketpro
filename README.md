@@ -50,7 +50,7 @@ Para cambiar el dominio en el futuro, actualiza la configuracion del sitio y rev
 1. Anadir el par ES/EN en `src/data/digiclara.ts`.
 2. Usar un slug unico.
 3. Asignar categoria, etiquetas, autor y fechas.
-4. Crear una imagen local unica en `public/assets/images/articles/`.
+4. Crear o descargar con licencia una imagen local unica en `public/assets/images/articles/`.
 5. Registrar credito en `public/assets/media-credits.json`.
 6. Incluir fuentes reales con URL.
 7. Ejecutar `npm run validate` y `npm run build`.

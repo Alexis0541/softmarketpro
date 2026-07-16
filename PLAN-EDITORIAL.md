@@ -30,7 +30,7 @@ Responsable: Alexis Moncada
 2. Traducir y revisar version inglesa.
 3. Asignar categoria, etiquetas, autor, fecha y resumen.
 4. Crear imagen local unica y alt text en ambos idiomas.
-5. Registrar credito en `public/assets/media-credits.json`.
+5. Registrar credito y fuente en `public/assets/media-credits.json`.
 6. Anadir fuentes reales y enlaces.
 7. Confirmar relacionados, canonical, hreflang y datos estructurados.
 8. Ejecutar `npm run validate` y `npm run build`.

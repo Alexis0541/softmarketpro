@@ -42,8 +42,8 @@ const slugs = [...defsBlock.matchAll(/^\s+\['([^']+)',\s*'[^']+',\s*'[^']+',/gm)
 const duplicates = slugs.filter((slug, index) => slugs.indexOf(slug) !== index);
 if (duplicates.length) failures.push(`duplicate article slugs: ${duplicates.join(', ')}`);
 for (const slug of slugs) {
-  const image = path.join(root, 'public/assets/images/articles', `${slug}.svg`);
-  if (!fs.existsSync(image)) failures.push(`missing article image: ${slug}.svg`);
+  const image = path.join(root, 'public/assets/images/articles', `${slug}.jpg`);
+  if (!fs.existsSync(image)) failures.push(`missing article image: ${slug}.jpg`);
 }
 if (!fs.existsSync(path.join(root, 'public/assets/media-credits.json'))) failures.push('missing media-credits.json');
 
