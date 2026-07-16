@@ -6,6 +6,12 @@ type Video = {
   embed: string;
 };
 
+type Media = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
 export type ArticleBodyBase = {
   quick: string[];
   sections: [string, string[]][];
@@ -15,6 +21,7 @@ export type ArticleBodyBase = {
   faq: [string, string][];
   conclusion: string;
   video?: Video;
+  media?: Media[];
 };
 
 type Copy = {
@@ -31,6 +38,7 @@ type Copy = {
   faq: [string, string][];
   conclusion: string;
   video?: Video;
+  media?: Media[];
 };
 
 const body = (copy: Copy): ArticleBodyBase => ({
@@ -46,6 +54,7 @@ const body = (copy: Copy): ArticleBodyBase => ({
   faq: copy.faq,
   conclusion: copy.conclusion,
   ...(copy.video ? { video: copy.video } : {}),
+  ...(copy.media ? { media: copy.media } : {}),
 });
 
 export const articleBodies: Record<string, Record<Lang, ArticleBodyBase>> = {
@@ -63,6 +72,7 @@ export const articleBodies: Record<string, Record<Lang, ArticleBodyBase>> = {
       warnings: ['Un logo real no demuestra que el mensaje sea autentico.', 'Un enlace acortado oculta el destino real.', 'Los codigos de verificacion nunca deben compartirse con soporte falso.'],
       faq: [['¿Todos los correos con errores son phishing?', 'No. Los errores ayudan a sospechar, pero muchos ataques estan bien escritos y copian plantillas reales.'], ['¿Es seguro abrir el correo si no hago clic?', 'Normalmente leerlo no es el problema; el riesgo aumenta al abrir enlaces, adjuntos o responder con datos.']],
       conclusion: 'La mejor defensa contra el phishing es bajar la velocidad: comprobar dominio, contexto y canal antes de entregar datos o ejecutar archivos.',
+      media: [{ src: '/assets/images/articles/quishing-codigos-qr.jpg', alt: 'Persona escaneando un codigo QR con un telefono', caption: 'El phishing tambien puede llegar como imagen o codigo QR, no solo como enlace visible.' }],
       video: { title: 'NCSC Small Business Guide - Avoiding phishing attacks', url: 'https://www.youtube.com/watch?v=bG84bwxZ_40', embed: 'https://www.youtube-nocookie.com/embed/bG84bwxZ_40' },
     }),
     en: body({
@@ -78,6 +88,7 @@ export const articleBodies: Record<string, Record<Lang, ArticleBodyBase>> = {
       warnings: ['A real logo does not prove authenticity.', 'A shortened link hides the real destination.', 'Verification codes should never be shared with fake support.'],
       faq: [['Are all emails with mistakes phishing?', 'No. Mistakes can help, but many attacks are well written and copy real templates.'], ['Is opening the email itself dangerous?', 'Usually reading is not the main issue; risk grows when you open links, attachments or reply with data.']],
       conclusion: 'The best phishing defence is slowing down: verify domain, context and channel before handing over data or running files.',
+      media: [{ src: '/assets/images/articles/quishing-codigos-qr.jpg', alt: 'Person scanning a QR code with a phone', caption: 'Phishing can also arrive as an image or QR code, not only as a visible link.' }],
       video: { title: 'NCSC Small Business Guide - Avoiding phishing attacks', url: 'https://www.youtube.com/watch?v=bG84bwxZ_40', embed: 'https://www.youtube-nocookie.com/embed/bG84bwxZ_40' },
     }),
   },
@@ -697,6 +708,7 @@ export const articleBodies: Record<string, Record<Lang, ArticleBodyBase>> = {
       warnings: ['La nube depende de recuperar la cuenta.', 'El disco local no protege contra incendio o robo si esta al lado.', 'Sin versionado puedes sincronizar borrados accidentales.'],
       faq: [['¿Cuál es mejor?', 'No hay ganador unico. Local gana en rapidez; nube gana en distancia y disponibilidad.'], ['¿Puedo usar solo nube?', 'Puedes, pero revisa versionado, recuperacion de cuenta y una copia adicional para datos criticos.']],
       conclusion: 'La mejor estrategia combina rapidez local, distancia de la nube y pruebas reales de restauracion.',
+      media: [{ src: '/assets/images/articles/compartir-archivos-nube.jpg', alt: 'Disco externo conectado a un portatil', caption: 'Una copia local bien gestionada complementa la nube y acelera restauraciones grandes.' }],
     }),
     en: body({
       quick: ['Local backup restores quickly; cloud protects against physical loss.', 'Without versioning, syncing mistakes also copies mistakes.', 'Combining both models is usually best.'],
@@ -711,6 +723,173 @@ export const articleBodies: Record<string, Record<Lang, ArticleBodyBase>> = {
       warnings: ['Cloud depends on account recovery.', 'Local drive does not protect against fire or theft if beside the computer.', 'Without versioning you may sync accidental deletions.'],
       faq: [['Which is better?', 'There is no single winner. Local wins speed; cloud wins distance and availability.'], ['Can I use only cloud?', 'You can, but review versioning, account recovery and an extra copy for critical data.']],
       conclusion: 'The best strategy combines local speed, cloud distance and real restoration tests.',
+      media: [{ src: '/assets/images/articles/compartir-archivos-nube.jpg', alt: 'External drive connected to a laptop', caption: 'A well-managed local copy complements cloud storage and speeds up large restores.' }],
+    }),
+  },
+  'quishing-codigos-qr': {
+    es: body({
+      quick: ['Un QR es un enlace que no ves hasta despues de escanearlo.', 'El riesgo aumenta en carteles, parkings, restaurantes, emails y paquetes inesperados.', 'Antes de pagar o iniciar sesion, revisa la URL completa y entra por la app oficial si hay dudas.'],
+      contextTitle: 'Por que los QR cambiaron el phishing',
+      context: ['El quishing es phishing escondido dentro de un codigo QR. No es una tecnica futurista: funciona porque el QR convierte un enlace en una imagen y empuja al usuario a sacar el movil. En correo, algunos filtros ven una imagen donde antes verian una URL sospechosa; en la calle, una pegatina encima de otra puede cambiar un pago real por una pagina fraudulenta.', 'La FTC advierte que un QR malicioso puede llevar a una web copiada o intentar instalar software danino. El NCSC explica que muchos usuarios ya desconfian de enlaces raros, pero bajan la guardia cuando la accion se presenta como escaneo normal. Microsoft tambien ha documentado patrones de phishing con QR en correos corporativos, especialmente cuando el atacante busca mover la victima del ordenador al movil.'],
+      decisionTitle: 'Escenarios donde conviene desconfiar',
+      decision: ['El QR de un parquimetro, un cartel de pago, una mesa de restaurante o un paquete no esperado merece una pausa. Mira si hay pegatinas superpuestas, dominios extranos, acortadores o urgencia. Si la operacion implica dinero, credenciales o datos personales, no basta con que el diseno parezca profesional.', 'En empresas, los QR en adjuntos PDF o imagenes dentro de emails son especialmente delicados. Sacan al usuario del entorno protegido del correo y lo llevan a una pantalla pequena donde se lee peor la direccion. Un atacante puede imitar Microsoft 365, banca, paqueteria o herramientas internas.'],
+      practiceTitle: 'Como verificar sin perder comodidad',
+      practice: ['Usa la camara o un lector que muestre la direccion antes de abrir. Revisa dominio, ortografia y ruta. Si esperas pagar aparcamiento, busca la app oficial del ayuntamiento o empresa; si esperas un paquete, abre la app de la empresa de transporte en vez de seguir el QR de un mensaje.', 'Para negocios pequenos, imprime carteles con dominio visible junto al QR, revisa pegatinas fisicas y coloca avisos de verificacion. Para equipos de trabajo, ensena que un QR en un email se trata como enlace: se reporta si es inesperado y se valida por canal independiente.'],
+      steps: ['Mira si el QR esta pegado encima de otro soporte.', 'Escanea sin abrir automaticamente el enlace.', 'Lee el dominio real antes de tocar.', 'Evita iniciar sesion desde QR no esperado.', 'Usa app oficial o web escrita manualmente para pagos.'],
+      tips: ['Desactiva apertura automatica si tu lector lo permite.', 'No escanees QR en correos urgentes sin validar.', 'En carteles publicos, busca manipulacion fisica alrededor del codigo.'],
+      warnings: ['Un QR impreso en buen papel tambien puede ser falso.', 'El candado HTTPS no prueba que el sitio sea legitimo.', 'Los acortadores impiden evaluar el destino con claridad.'],
+      faq: [['¿Debo dejar de usar QR?', 'No. Los QR son utiles; el riesgo aparece cuando sustituyen la verificacion de dominio y contexto.'], ['¿Que hago si pague en una web falsa?', 'Contacta con tu banco, conserva capturas y cambia contrasenas si escribiste credenciales.']],
+      conclusion: 'El QR seguro no depende del dibujo del codigo, sino de verificar destino, contexto y canal antes de introducir datos.',
+      media: [{ src: '/assets/images/articles/quishing-codigos-qr.jpg', alt: 'Persona escaneando un codigo QR con un telefono', caption: 'Los QR convierten un enlace en una imagen: la verificacion ocurre despues de escanear.' }],
+      video: { title: 'QR code phishing protection - Microsoft Learn', url: 'https://learn.microsoft.com/en-us/shows/microsoft-sentinel-defender-xdr-virtual-ninja-training/qr-code-phishing-protection', embed: 'https://www.youtube-nocookie.com/embed/0M8oEGaRAgk' },
+    }),
+    en: body({
+      quick: ['A QR code is a link you cannot read until after scanning.', 'Risk increases on posters, parking meters, restaurants, emails and unexpected parcels.', 'Before paying or signing in, check the full URL and use the official app when unsure.'],
+      contextTitle: 'Why QR changed phishing',
+      context: ['Quishing is phishing hidden inside a QR code. It works because the QR code turns a link into an image and moves the user to a phone. In email, some filters see an image where they would previously see a suspicious URL; in public spaces, a sticker over a real code can redirect a payment.', 'FTC warns that malicious QR codes may lead to spoofed sites or harmful software. NCSC notes that people often distrust odd links but relax when scanning feels normal. Microsoft has also documented QR phishing patterns in corporate mail, especially when attackers want to move victims from desktop to mobile.'],
+      decisionTitle: 'Scenarios that deserve suspicion',
+      decision: ['A QR code on a parking meter, payment poster, restaurant table or unexpected package deserves a pause. Look for stickers, odd domains, shorteners and urgency. If money, credentials or personal data are involved, a professional design is not enough.', 'In organisations, QR codes in PDF attachments or email images are especially sensitive. They move the user out of the protected mail environment onto a smaller screen where the address is harder to read. Attackers can imitate Microsoft 365, banking, delivery services or internal tools.'],
+      practiceTitle: 'How to verify without losing convenience',
+      practice: ['Use a camera or reader that previews the address before opening. Check domain, spelling and path. For parking, use the official app; for parcels, open the carrier app rather than following a message QR.', 'Small businesses should print the visible domain next to QR codes, inspect physical stickers and add verification notes. Work teams should treat email QR codes as links: report unexpected ones and validate through an independent channel.'],
+      steps: ['Check whether the QR is stuck over another surface.', 'Scan without automatically opening.', 'Read the real domain before tapping.', 'Avoid signing in from unexpected QR codes.', 'Use the official app or typed website for payments.'],
+      tips: ['Disable automatic opening if available.', 'Do not scan urgent email QR codes without verification.', 'In public places, inspect physical tampering around the code.'],
+      warnings: ['A QR printed professionally can still be fake.', 'HTTPS does not prove the site is legitimate.', 'Shorteners make destination review harder.'],
+      faq: [['Should I stop using QR codes?', 'No. QR codes are useful; risk appears when they replace domain and context verification.'], ['What if I paid on a fake page?', 'Contact your bank, keep screenshots and change passwords if you entered credentials.']],
+      conclusion: 'A safe QR code is not about the pattern; it is about verifying destination, context and channel before entering data.',
+      media: [{ src: '/assets/images/articles/quishing-codigos-qr.jpg', alt: 'Person scanning a QR code with a phone', caption: 'QR codes turn links into images: verification happens after scanning.' }],
+      video: { title: 'QR code phishing protection - Microsoft Learn', url: 'https://learn.microsoft.com/en-us/shows/microsoft-sentinel-defender-xdr-virtual-ninja-training/qr-code-phishing-protection', embed: 'https://www.youtube-nocookie.com/embed/0M8oEGaRAgk' },
+    }),
+  },
+  'hogar-inteligente-privacidad': {
+    es: body({
+      quick: ['Un hogar inteligente mezcla comodidad, sensores, nube y cuentas.', 'Camaras, asistentes, timbres, enchufes y televisores no tienen el mismo nivel de riesgo.', 'Compra pensando en actualizaciones, permisos, ubicacion fisica y salida del producto.'],
+      contextTitle: 'La casa conectada tambien es una superficie de datos',
+      context: ['El hogar inteligente no es solo luces que se encienden con la voz. Incluye camaras, microfonos, cerraduras, timbres, sensores de movimiento, televisores, aspiradoras, termostatos y aplicaciones moviles. Cada dispositivo puede crear datos sobre rutinas, presencia, habitaciones, invitados o habitos de consumo.', 'FTC, CISA, ENISA y NIST coinciden en una idea: los dispositivos conectados deben evaluarse durante todo su ciclo de vida. No basta con que funcionen el dia de la compra; importan las actualizaciones, la cuenta asociada, el soporte futuro, los permisos de la app y que pasa cuando vendes, regalas o tiras el dispositivo.'],
+      decisionTitle: 'Antes de comprar: preguntas que casi nadie hace',
+      decision: ['Pregunta si el dispositivo funciona sin nube, cuanto tiempo recibe actualizaciones, si permite borrar datos, si ofrece 2FA y si tiene politicas claras. Un producto barato puede salir caro si queda abandonado con camara, microfono o acceso a red.', 'La ubicacion fisica tambien es seguridad. Una camara en una entrada no implica el mismo riesgo que una camara en un dormitorio. Un asistente de voz en cocina no tiene el mismo impacto que uno en una sala donde se tratan datos de trabajo.'],
+      practiceTitle: 'Segmentar, actualizar y revisar cuentas',
+      practice: ['Crea una red de invitados o red separada para dispositivos IoT si tu router lo permite. No soluciona todo, pero reduce el movimiento lateral si un aparato queda comprometido. Cambia contrasenas por defecto, activa actualizaciones y elimina dispositivos que ya no uses.', 'Revisa la app del fabricante: permisos de ubicacion, contactos, Bluetooth, microfono y notificaciones. Si una app de bombilla pide acceso permanente a ubicacion precisa, necesita una explicacion razonable. Si no la hay, limita o cambia de producto.'],
+      steps: ['Haz inventario de dispositivos conectados en casa.', 'Separa IoT en red de invitados cuando sea posible.', 'Activa 2FA en cuentas de fabricantes importantes.', 'Revisa actualizaciones y permisos cada tres meses.', 'Borra datos y desvincula cuentas antes de vender o regalar.'],
+      tips: ['Compra marcas con historial de actualizaciones.', 'Coloca camaras solo donde aceptarias que haya grabacion.', 'Desactiva funciones inteligentes que no uses.'],
+      warnings: ['Un dispositivo barato puede depender de una nube que desaparece.', 'La comodidad de compartir cuenta puede borrar responsabilidades.', 'Restablecer de fabrica no siempre borra datos en la nube.'],
+      faq: [['¿Debo poner todos los dispositivos IoT en otra red?', 'Si tu router lo permite, es una buena practica para reducir alcance, aunque no sustituye actualizaciones y cuentas seguras.'], ['¿Que dispositivo es mas sensible?', 'Camaras, cerraduras, asistentes con microfono y dispositivos con acceso a rutinas del hogar suelen requerir mas cuidado.']],
+      conclusion: 'Un hogar inteligente seguro se disena por capas: compras responsables, ubicacion prudente, red separada, cuentas protegidas y retirada ordenada.',
+      media: [{ src: '/assets/images/articles/hogar-inteligente-privacidad.jpg', alt: 'Ordenador portatil conectado a una red inalambrica domestica', caption: 'La red domestica es la base sobre la que se apoyan camaras, sensores y otros dispositivos conectados.' }],
+      video: { title: 'Securing Internet of Things devices - CISA', url: 'https://www.youtube.com/watch?v=tM7sL_G1DJA', embed: 'https://www.youtube-nocookie.com/embed/tM7sL_G1DJA' },
+    }),
+    en: body({
+      quick: ['A smart home mixes convenience, sensors, cloud and accounts.', 'Cameras, assistants, doorbells, plugs and TVs do not carry the same risk.', 'Buy with updates, permissions, physical placement and product retirement in mind.'],
+      contextTitle: 'The connected home is also a data surface',
+      context: ['Smart home is not just lights controlled by voice. It includes cameras, microphones, locks, doorbells, motion sensors, TVs, vacuum cleaners, thermostats and mobile apps. Each device may create data about routines, presence, rooms, guests or consumption habits.', 'FTC, CISA, ENISA and NIST converge on one idea: connected devices should be assessed across their life cycle. It is not enough that they work on purchase day; updates, associated accounts, future support, app permissions and disposal matter.'],
+      decisionTitle: 'Before buying: questions almost nobody asks',
+      decision: ['Ask whether the device works without cloud, how long it receives updates, whether data can be deleted, whether 2FA exists and whether policies are clear. A cheap device can become expensive if abandoned with camera, microphone or network access.', 'Physical placement is security too. A camera at an entrance is not the same as a bedroom camera. A voice assistant in a kitchen has a different impact than one in a room where work data is discussed.'],
+      practiceTitle: 'Segment, update and review accounts',
+      practice: ['Create a guest or separate network for IoT if your router allows it. It does not solve everything, but reduces lateral movement if a device is compromised. Change default passwords, enable updates and remove unused devices.', 'Review the manufacturer app: location, contacts, Bluetooth, microphone and notification permissions. If a light bulb app asks for permanent precise location, it needs a reasonable explanation. If not, limit it or change product.'],
+      steps: ['Inventory connected home devices.', 'Separate IoT on guest network where possible.', 'Enable 2FA on important manufacturer accounts.', 'Review updates and permissions quarterly.', 'Delete data and unlink accounts before selling or gifting.'],
+      tips: ['Buy from brands with update history.', 'Place cameras only where recording would be acceptable.', 'Disable smart functions you do not use.'],
+      warnings: ['A cheap device may depend on a cloud that disappears.', 'Sharing one account removes accountability.', 'Factory reset does not always delete cloud data.'],
+      faq: [['Should every IoT device be on another network?', 'If your router allows it, it is a good practice to reduce reach, but it does not replace updates and secure accounts.'], ['Which device is most sensitive?', 'Cameras, locks, voice assistants and devices that reveal household routines usually require more care.']],
+      conclusion: 'A safer smart home is designed in layers: responsible buying, careful placement, separate network, protected accounts and orderly retirement.',
+      media: [{ src: '/assets/images/articles/hogar-inteligente-privacidad.jpg', alt: 'Laptop connected to a home wireless network', caption: 'The home network is the base for cameras, sensors and other connected devices.' }],
+      video: { title: 'Securing Internet of Things devices - CISA', url: 'https://www.youtube.com/watch?v=tM7sL_G1DJA', embed: 'https://www.youtube-nocookie.com/embed/tM7sL_G1DJA' },
+    }),
+  },
+  'permisos-extension-navegador': {
+    es: body({
+      quick: ['Una extension puede leer y modificar paginas si tiene permisos amplios.', 'El riesgo cambia cuando pide acceso a todos los sitios, historial, descargas o portapapeles.', 'Instala pocas, revisa permisos y elimina las que no uses.'],
+      contextTitle: 'Por que una extension no es una app pequeña cualquiera',
+      context: ['Las extensiones viven dentro del navegador, justo donde escribes contrasenas, lees correo, gestionas banca, editas documentos y usas paneles de trabajo. Por eso sus permisos importan mas de lo que parece. Un complemento de productividad puede tener capacidad para leer contenido de paginas, cambiar peticiones o acceder a datos sensibles si el permiso lo permite.', 'Google explica que los permisos limitan el dano si una extension se compromete, y Mozilla documenta que los permisos describen el acceso solicitado. Investigaciones academicas y de seguridad han mostrado que extensiones populares pueden filtrar contenido de paginas o cambiar de comportamiento despues de actualizaciones.'],
+      decisionTitle: 'Permisos que deben hacerte parar',
+      decision: ['El permiso para leer y cambiar datos en todos los sitios es uno de los mas amplios. Puede ser razonable para un bloqueador de contenido, traductor o gestor de contrasenas, pero no para una calculadora simple. Acceso a historial, descargas, portapapeles o pestañas tambien requiere una explicacion clara.', 'No evalúes solo estrellas. Mira desarrollador, fecha de actualizacion, politica de privacidad, numero de instalaciones y permisos nuevos tras una actualizacion. Una extension puede empezar razonable y volverse riesgosa si cambia de propietario o modelo de negocio.'],
+      practiceTitle: 'Rutina para limpiar el navegador',
+      practice: ['Una vez al mes abre la lista de extensiones y elimina las que no recuerdas haber usado. Desactiva antes de borrar si necesitas probar impacto. En Chrome, revisa acceso a sitios y limita a "al hacer clic" cuando sea posible. En Firefox, revisa permisos desde la pagina del complemento.', 'Para trabajo, usa perfiles separados: uno limpio para banca y administracion, otro con extensiones de productividad. En equipos de empresa, las politicas de lista permitida o bloqueada reducen instalaciones impulsivas.'],
+      steps: ['Abre la lista de extensiones instaladas.', 'Elimina las que no uses o no reconozcas.', 'Revisa permisos de acceso a sitios.', 'Limita extensiones a sitios concretos cuando sea posible.', 'Separa navegador de trabajo sensible y navegador experimental.'],
+      tips: ['Prefiere extensiones mantenidas y con politica clara.', 'Lee permisos nuevos tras actualizaciones.', 'No instales extensiones desde enlaces fuera de la tienda oficial.'],
+      warnings: ['Una extension con acceso amplio puede ver informacion dentro de paginas.', 'Una extension abandonada puede ser comprada o modificada.', 'El modo incognito no siempre desactiva extensiones si las autorizaste.'],
+      faq: [['¿Son peligrosas todas las extensiones?', 'No. Muchas son utiles, pero conviene tratarlas como software con acceso privilegiado al navegador.'], ['¿Cuantas extensiones deberia tener?', 'Las minimas que realmente uses y entiendas. Menos extensiones significa menos superficie de riesgo.']],
+      conclusion: 'La seguridad del navegador no depende solo del navegador: las extensiones son pequeñas puertas con permisos que conviene revisar.',
+      media: [{ src: '/assets/images/articles/permisos-extension-navegador.jpg', alt: 'Pantalla de ordenador con codigo y navegador', caption: 'Las extensiones se ejecutan dentro del espacio donde navegas, trabajas y gestionas cuentas.' }],
+    }),
+    en: body({
+      quick: ['An extension can read and modify pages if it has broad permissions.', 'Risk changes when it asks for all-sites access, history, downloads or clipboard.', 'Install few, review permissions and remove unused ones.'],
+      contextTitle: 'Why an extension is not just a small app',
+      context: ['Extensions live inside the browser, exactly where you type passwords, read email, manage banking, edit documents and use work dashboards. Their permissions matter more than they seem. A productivity add-on may read page content, change requests or access sensitive data if permissions allow it.', 'Google explains that permissions limit damage if an extension is compromised, and Mozilla documents that permissions describe requested access. Security research has shown that popular extensions can leak page content or change behaviour after updates.'],
+      decisionTitle: 'Permissions that should make you pause',
+      decision: ['Permission to read and change data on all sites is one of the broadest. It may be reasonable for a content blocker, translator or password manager, but not for a simple calculator. History, downloads, clipboard or tab access also need a clear reason.', 'Do not judge only by stars. Look at developer, update date, privacy policy, installations and new permissions after updates. An extension can start reasonable and become risky if ownership or business model changes.'],
+      practiceTitle: 'Browser cleaning routine',
+      practice: ['Once a month, open the extension list and remove those you do not remember using. Disable before deleting if you need to test impact. In Chrome, review site access and limit to "on click" where possible. In Firefox, review permissions from the add-on page.', 'For work, use separate profiles: a clean one for banking and administration, another with productivity extensions. In companies, allow/block lists reduce impulsive installation.'],
+      steps: ['Open the installed extensions list.', 'Remove unused or unknown ones.', 'Review site access permissions.', 'Limit extensions to specific sites where possible.', 'Separate sensitive work browsing from experimental browsing.'],
+      tips: ['Prefer maintained extensions with clear policies.', 'Read new permissions after updates.', 'Do not install extensions from links outside the official store.'],
+      warnings: ['A broad extension can see information inside pages.', 'An abandoned extension may be bought or modified.', 'Incognito mode does not always disable extensions if authorised.'],
+      faq: [['Are all extensions dangerous?', 'No. Many are useful, but treat them as software with privileged browser access.'], ['How many extensions should I have?', 'The minimum you actually use and understand. Fewer extensions means less risk surface.']],
+      conclusion: 'Browser security depends not only on the browser: extensions are small doors with permissions worth reviewing.',
+      media: [{ src: '/assets/images/articles/permisos-extension-navegador.jpg', alt: 'Computer screen with code and browser', caption: 'Extensions run inside the space where you browse, work and manage accounts.' }],
+    }),
+  },
+  'compartir-archivos-nube': {
+    es: body({
+      quick: ['Compartir por enlace no es igual que dar acceso a personas concretas.', 'El permiso de edicion suele ser mas peligroso que el de lectura.', 'Revisa enlaces antiguos, carpetas padre y usuarios externos.'],
+      contextTitle: 'El error comun: pensar que compartir es una sola cosa',
+      context: ['Google Drive, OneDrive y Dropbox ofrecen varias formas de compartir: personas especificas, grupos, enlaces restringidos, enlaces publicos, lectura, comentario o edicion. El problema aparece cuando se usa "cualquiera con el enlace" para ahorrar tiempo y luego se olvida que ese enlace sigue vivo.', 'Microsoft recuerda que los archivos de OneDrive son privados hasta que se comparten. Google advierte que si das acceso a cualquiera con el enlace, la carpeta no restringe quien puede entrar. Dropbox explica que los permisos de carpetas padre pueden afectar subcarpetas. La diferencia practica es enorme: no compartes un archivo, compartes un camino de acceso.'],
+      decisionTitle: 'Lectura, edición y herencia de carpetas',
+      decision: ['Dar lectura permite ver y a veces descargar. Dar edicion permite cambiar, borrar, anadir o modificar segun el servicio. En carpetas, el permiso puede heredarse a todo lo que hay dentro. Antes de compartir una carpeta completa, pregunta si bastaria un archivo concreto.', 'Para clientes, proveedores o colaboradores temporales, usa acceso nominal y fecha de revision. Si el servicio ofrece caducidad, contrasena o bloqueo de descarga, valora activarlo segun sensibilidad. No confies en que un enlace antiguo desaparece solo.'],
+      practiceTitle: 'Auditoria sencilla de enlaces',
+      practice: ['Una vez al mes entra en "Compartido por mi" o equivalente. Busca enlaces publicos, usuarios desconocidos y carpetas con edicion. Retira acceso a proyectos cerrados, proveedores antiguos y documentos con datos personales que ya no deben circular.', 'En empresa, define reglas: documentos sensibles no se comparten con "cualquiera con enlace"; los accesos externos tienen responsable; y los permisos se revisan al cerrar proyecto. La seguridad aqui es mas proceso que tecnologia.'],
+      steps: ['Lista documentos compartidos por ti.', 'Separa enlaces publicos de accesos nominales.', 'Cambia edicion a lectura cuando sea suficiente.', 'Elimina usuarios externos que ya no participan.', 'Programa revision al cerrar proyectos.'],
+      tips: ['Comparte archivos concretos en vez de carpetas amplias.', 'Usa nombres de documentos que no revelen datos sensibles.', 'Comprueba que el destinatario correcto puede entrar antes de enviar mas enlaces.'],
+      warnings: ['Un enlace reenviado puede llegar a personas no previstas.', 'Los permisos de una carpeta padre pueden abrir mas de lo que querias.', 'Quitar un enlace no siempre quita accesos directos ya concedidos.'],
+      faq: [['¿Es mejor enlace o acceso por email?', 'Para datos sensibles, acceso nominal por email suele dar mas control.'], ['¿Puedo compartir con clientes sin cuenta?', 'Depende del servicio y del riesgo. Si no hay cuenta, pierdes parte del control de identidad.']],
+      conclusion: 'Compartir en la nube con seguridad significa revisar quien, que, cuanto tiempo y con que permiso, no solo copiar un enlace.',
+      media: [{ src: '/assets/images/articles/compartir-archivos-nube.jpg', alt: 'Disco externo conectado a un ordenador portatil', caption: 'La nube facilita compartir, pero una copia local o controlada sigue ayudando a mantener gobierno sobre los datos.' }],
+    }),
+    en: body({
+      quick: ['Sharing by link is not the same as granting access to specific people.', 'Edit permission is usually riskier than view permission.', 'Review old links, parent folders and external users.'],
+      contextTitle: 'The common mistake: treating sharing as one thing',
+      context: ['Google Drive, OneDrive and Dropbox offer several sharing modes: specific people, groups, restricted links, public links, view, comment or edit. Problems appear when "anyone with the link" is used for speed and then forgotten.', 'Microsoft notes OneDrive files are private until shared. Google warns that anyone-with-link access does not restrict who can access. Dropbox explains that parent folder permissions can affect subfolders. The practical difference is huge: you are not only sharing a file, you are sharing an access path.'],
+      decisionTitle: 'View, edit and folder inheritance',
+      decision: ['View lets people see and sometimes download. Edit lets people change, delete, add or modify depending on service. In folders, permissions may inherit to everything inside. Before sharing a whole folder, ask whether one file would be enough.', 'For clients, suppliers or temporary collaborators, use named access and review dates. If the service offers expiry, password or download blocking, consider it according to sensitivity. Do not assume an old link disappears by itself.'],
+      practiceTitle: 'Simple link audit',
+      practice: ['Monthly, open "Shared by me" or equivalent. Look for public links, unknown users and folders with edit access. Remove access to closed projects, former suppliers and personal-data documents that should no longer circulate.', 'In business, define rules: sensitive documents are not shared with "anyone with the link"; external access has an owner; permissions are reviewed when projects close. Security here is more process than technology.'],
+      steps: ['List documents shared by you.', 'Separate public links from named access.', 'Change edit to view when enough.', 'Remove external users no longer involved.', 'Schedule review at project closure.'],
+      tips: ['Share specific files rather than broad folders.', 'Use document names that do not reveal sensitive data.', 'Confirm the right recipient can access before sending more links.'],
+      warnings: ['A forwarded link can reach unintended people.', 'Parent folder permissions can open more than intended.', 'Removing a link does not always remove direct access already granted.'],
+      faq: [['Is link or email access better?', 'For sensitive data, named email access usually gives more control.'], ['Can I share with clients without accounts?', 'It depends on service and risk. Without an account, you lose some identity control.']],
+      conclusion: 'Secure cloud sharing means reviewing who, what, how long and with which permission, not merely copying a link.',
+      media: [{ src: '/assets/images/articles/compartir-archivos-nube.jpg', alt: 'External drive connected to a laptop', caption: 'Cloud makes sharing easy, but controlled copies still help govern important data.' }],
+    }),
+  },
+  'privacidad-ia-generativa': {
+    es: body({
+      quick: ['No pegues datos sensibles en una IA sin entender uso, retencion y controles.', 'Las politicas cambian entre cuentas gratuitas, personales, empresariales y API.', 'El mayor riesgo cotidiano no es solo entrenamiento: tambien memoria, historial, archivos, plugins y respuestas copiadas.'],
+      contextTitle: 'La IA generativa como nuevo lugar de trabajo',
+      context: ['Muchas personas ya usan asistentes de IA para resumir correos, redactar contratos, analizar hojas de calculo, revisar codigo o preparar mensajes. Eso convierte al chat en una bandeja de entrada paralela: recibe datos, contexto, archivos, nombres, estrategias y dudas personales.', 'NIST propone gestionar riesgos de IA con funciones como gobernar, mapear, medir y gestionar. ENISA aborda ciberseguridad de IA y la Union Europea ha desarrollado un marco regulatorio basado en riesgo. Para usuarios, la traduccion practica es sencilla: antes de pegar informacion, entiende que tipo de dato es y que controles ofrece la herramienta.'],
+      decisionTitle: 'Datos que conviene no pegar',
+      decision: ['Evita introducir documentos legales completos, datos medicos, credenciales, secretos comerciales, bases de datos de clientes, codigos privados o informacion de menores si no tienes permiso y controles adecuados. Anonimizar no es solo quitar el nombre: fechas, importes, lugares y combinaciones pueden identificar.', 'Diferencia entre pedir ayuda con una estructura y entregar el documento real. Puedes pedir "crea una plantilla de respuesta" sin pegar el expediente completo. Puedes pedir "explica esta clausula generica" sin revelar nombres ni numeros de contrato.'],
+      practiceTitle: 'Controles de privacidad y hábitos sanos',
+      practice: ['Revisa opciones de historial, memoria, entrenamiento, exportacion y borrado. Algunas herramientas tienen chats temporales, controles de uso de datos o planes empresariales con politicas distintas. No asumas que todas las versiones funcionan igual.', 'Si trabajas en empresa, crea una politica simple: categorias de datos permitidos, datos prohibidos, herramientas aprobadas, responsable de revisar salidas y procedimiento para incidentes. La IA no deberia recibir mas informacion que la necesaria para la tarea.'],
+      steps: ['Clasifica el dato antes de pegarlo.', 'Revisa controles de privacidad de la herramienta.', 'Usa ejemplos ficticios cuando sea posible.', 'Evita subir archivos completos si basta un fragmento anonimizado.', 'Revisa la respuesta antes de copiarla a documentos reales.'],
+      tips: ['Usa chats temporales para pruebas sensibles cuando existan.', 'Separa cuenta personal y cuenta de trabajo.', 'Pide explicaciones generales antes de compartir contexto real.'],
+      warnings: ['Borrar una conversacion no siempre implica borrado inmediato de todos los sistemas.', 'Una respuesta puede mezclar errores con lenguaje convincente.', 'Los conectores y plugins amplian superficie de datos.'],
+      faq: [['¿La IA siempre entrena con lo que escribo?', 'Depende del servicio, configuracion y tipo de cuenta. Revisa la politica y controles concretos.'], ['¿Puedo usar IA con datos de clientes?', 'Solo si tienes base legal, permiso, contrato y controles adecuados para ese contexto.']],
+      conclusion: 'Usar IA con privacidad exige tratar el prompt como un documento: clasificar datos, minimizar contexto, revisar controles y validar resultados.',
+      media: [{ src: '/assets/images/articles/privacidad-ia-generativa.jpg', alt: 'Representacion visual de inteligencia artificial', caption: 'La privacidad en IA no empieza en la respuesta: empieza antes de escribir el prompt.' }],
+      video: { title: 'NIST AI Risk Management Framework overview', url: 'https://www.youtube.com/watch?v=I1Y-O1n55ww', embed: 'https://www.youtube-nocookie.com/embed/I1Y-O1n55ww' },
+    }),
+    en: body({
+      quick: ['Do not paste sensitive data into AI without understanding use, retention and controls.', 'Policies differ between free, personal, enterprise and API accounts.', 'The daily risk is not only training: memory, history, files, plugins and copied answers matter too.'],
+      contextTitle: 'Generative AI as a new workplace',
+      context: ['Many people now use AI assistants to summarise emails, draft contracts, analyse spreadsheets, review code or prepare messages. That turns chat into a parallel inbox: it receives data, context, files, names, strategies and personal doubts.', 'NIST proposes managing AI risk through functions such as govern, map, measure and manage. ENISA addresses AI cybersecurity, and the European Union has built risk-based regulation. For users, the practical translation is simple: before pasting information, understand the data type and the tool controls.'],
+      decisionTitle: 'Data you should avoid pasting',
+      decision: ['Avoid full legal documents, medical data, credentials, trade secrets, customer databases, private code or information about children unless you have permission and suitable controls. Anonymising is not just removing a name: dates, amounts, places and combinations can identify.', 'Separate asking for structure from handing over the real document. You can ask for a response template without pasting the full case file. You can ask for a generic clause explanation without revealing names or contract numbers.'],
+      practiceTitle: 'Privacy controls and healthy habits',
+      practice: ['Review history, memory, training, export and deletion settings. Some tools provide temporary chats, data-use controls or enterprise plans with different policies. Do not assume every version works the same.', 'At work, create a simple policy: allowed data categories, prohibited data, approved tools, output review owner and incident procedure. AI should not receive more information than necessary.'],
+      steps: ['Classify the data before pasting.', 'Review privacy controls for the tool.', 'Use fictional examples when possible.', 'Avoid full file uploads when an anonymised excerpt is enough.', 'Review the answer before copying it into real documents.'],
+      tips: ['Use temporary chats for sensitive tests when available.', 'Separate personal and work accounts.', 'Ask for general explanations before sharing real context.'],
+      warnings: ['Deleting a conversation may not mean immediate deletion from every system.', 'An answer can mix errors with convincing language.', 'Connectors and plugins expand the data surface.'],
+      faq: [['Does AI always train on what I write?', 'It depends on service, settings and account type. Review the exact policy and controls.'], ['Can I use AI with customer data?', 'Only with legal basis, permission, contract and controls suitable for that context.']],
+      conclusion: 'Using AI privately means treating the prompt as a document: classify data, minimise context, review controls and validate outputs.',
+      media: [{ src: '/assets/images/articles/privacidad-ia-generativa.jpg', alt: 'Visual representation of artificial intelligence', caption: 'AI privacy starts before the answer: it starts before writing the prompt.' }],
+      video: { title: 'NIST AI Risk Management Framework overview', url: 'https://www.youtube.com/watch?v=I1Y-O1n55ww', embed: 'https://www.youtube-nocookie.com/embed/I1Y-O1n55ww' },
     }),
   },
 };

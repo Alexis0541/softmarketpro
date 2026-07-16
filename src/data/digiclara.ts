@@ -212,6 +212,33 @@ const sourceSets = {
     { label: 'Apple Support - Privacy and Location Services', url: 'https://support.apple.com/en-us/102515' },
     { label: 'Apple Support - App Privacy Report', url: 'https://support.apple.com/en-us/102188' },
   ],
+  qr: [
+    { label: 'FTC - Scammers hide harmful links in QR codes', url: 'https://consumer.ftc.gov/consumer-alerts/2023/12/scammers-hide-harmful-links-qr-codes-steal-your-information' },
+    { label: 'NCSC - QR codes: what is the real risk?', url: 'https://www.ncsc.gov.uk/blog-post/qr-codes-whats-real-risk' },
+    { label: 'Microsoft Security - QR code phishing attacks', url: 'https://www.microsoft.com/en-us/security/blog/2024/11/04/how-microsoft-defender-for-office-365-innovated-to-address-qr-code-phishing-attacks/' },
+  ],
+  smartHome: [
+    { label: 'FTC - Securing Your Internet-Connected Devices at Home', url: 'https://consumer.ftc.gov/articles/securing-your-internet-connected-devices-home' },
+    { label: 'CISA - Securing the Internet of Things', url: 'https://www.cisa.gov/news-events/news/securing-internet-things-iot' },
+    { label: 'ENISA - Guidelines for Securing the Internet of Things', url: 'https://www.enisa.europa.eu/publications/guidelines-for-securing-the-internet-of-things' },
+    { label: 'NIST - Smart home users security and privacy perceptions', url: 'https://www.nist.gov/publications/smart-home-users-security-and-privacy-perceptions-and-actions-differ-device-category' },
+  ],
+  browserExtensions: [
+    { label: 'Chrome Developers - Declare permissions', url: 'https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions' },
+    { label: 'Chrome Web Store Help - Install and manage extensions', url: 'https://support.google.com/chrome_webstore/answer/2664769' },
+    { label: 'Google Online Security Blog - Staying Safe with Chrome Extensions', url: 'https://security.googleblog.com/2024/06/staying-safe-with-chrome-extensions.html' },
+  ],
+  cloudSharing: [
+    { label: 'Microsoft Support - Share files and folders in OneDrive', url: 'https://support.microsoft.com/en-us/onedrive/share-files-and-folders-in-microsoft-onedrive' },
+    { label: 'Google Drive Help - Share files from Google Drive', url: 'https://support.google.com/drive/answer/2494822' },
+    { label: 'Dropbox Help - Manage file and folder sharing permissions', url: 'https://help.dropbox.com/share/set-file-folder-permissions' },
+  ],
+  aiPrivacy: [
+    { label: 'NIST - AI Risk Management Framework', url: 'https://www.nist.gov/itl/ai-risk-management-framework' },
+    { label: 'NIST - Generative AI Profile', url: 'https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf' },
+    { label: 'ENISA - Artificial Intelligence and Next Gen Technologies', url: 'https://www.enisa.europa.eu/topics/artificial-intelligence-and-next-gen-technologies' },
+    { label: 'OpenAI Privacy Center', url: 'https://privacy.openai.com/' },
+  ],
   software: [
     { label: 'CISA - Update software', url: 'https://www.cisa.gov/secure-our-world/update-software' },
     { label: 'NCSC - Install latest updates', url: 'https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online/install-the-latest-software-and-app-updates' },
@@ -242,6 +269,11 @@ const defs = [
   ['permisos-aplicaciones', 'privacy', 'guides', ['Permisos', 'Aplicaciones'], sourceSets.appPermissions, 'Cómo revisar permisos de aplicaciones sin volverse paranoico', 'How to review app permissions without becoming paranoid', 'Criterios para conceder, retirar y revisar permisos con sentido común.', 'Criteria for granting, removing and reviewing permissions with common sense.', 'Ilustración de permisos de aplicaciones organizados por sensibilidad.', 'Illustration of app permissions organised by sensitivity.', false],
   ['proteger-cuenta-microsoft', 'windows', 'guides', ['Microsoft', 'Cuentas', 'Autenticación'], sourceSets.microsoftAccount, 'Cómo proteger una cuenta de Microsoft', 'How to protect a Microsoft account', 'Ajustes clave para reducir accesos no autorizados y recuperar la cuenta con menos riesgo.', 'Key settings to reduce unauthorised access and recover the account with less risk.', 'Fotografía de un portátil usado para revisar la seguridad de una cuenta Microsoft.', 'Photo of a laptop used to review Microsoft account security.', false],
   ['copia-local-nube', 'comparisons', 'comparisons', ['Copias de seguridad', 'Nube', 'Recuperación'], sourceSets.backup, 'Copia local frente a copia en la nube', 'Local backup vs cloud backup', 'Diferencias prácticas para elegir dónde guardar tus copias de seguridad.', 'Practical differences for choosing where to store backups.', 'Fotografía de un disco externo conectado a un portátil para comparar copias locales y nube.', 'Photo of an external drive connected to a laptop for comparing local and cloud backups.', false],
+  ['quishing-codigos-qr', 'security', 'guides', ['QR', 'Phishing', 'Pagos'], sourceSets.qr, 'Quishing: cómo evitar estafas con códigos QR', 'Quishing: how to avoid QR code scams', 'Guía para revisar códigos QR en pagos, correos, paquetes y carteles públicos antes de entregar datos.', 'A guide to checking QR codes in payments, emails, parcels and public posters before giving data.', 'Fotografía real de una persona escaneando un código QR con un teléfono.', 'Real photo of a person scanning a QR code with a phone.', false],
+  ['hogar-inteligente-privacidad', 'privacy', 'guides', ['Hogar inteligente', 'IoT', 'Privacidad'], sourceSets.smartHome, 'Privacidad en el hogar inteligente: cámaras, sensores y asistentes', 'Smart home privacy: cameras, sensors and assistants', 'Cómo comprar, configurar y retirar dispositivos conectados sin abrir más datos de los necesarios.', 'How to buy, configure and retire connected devices without exposing more data than needed.', 'Fotografía real relacionada con red doméstica y dispositivos conectados.', 'Real photo related to home network and connected devices.', false],
+  ['permisos-extension-navegador', 'software', 'guides', ['Navegador', 'Extensiones', 'Permisos'], sourceSets.browserExtensions, 'Extensiones del navegador: permisos que conviene revisar', 'Browser extensions: permissions worth reviewing', 'Qué significan los permisos de extensiones y cómo limpiar el navegador sin perder productividad.', 'What extension permissions mean and how to clean your browser without losing productivity.', 'Fotografía real de una pantalla de ordenador usada para trabajo digital.', 'Real photo of a computer screen used for digital work.', false],
+  ['compartir-archivos-nube', 'privacy', 'guides', ['Nube', 'Permisos', 'Archivos'], sourceSets.cloudSharing, 'Compartir archivos en la nube sin exponerlos de más', 'Sharing cloud files without overexposing them', 'Diferencias entre enlaces, usuarios concretos, permisos de edición y revisiones de acceso.', 'Differences between links, named users, edit permissions and access reviews.', 'Fotografía real de un disco externo conectado a un portátil.', 'Real photo of an external drive connected to a laptop.', false],
+  ['privacidad-ia-generativa', 'privacy', 'guides', ['IA', 'Privacidad', 'Datos'], sourceSets.aiPrivacy, 'Privacidad al usar IA generativa: qué no deberías pegar en un prompt', 'Privacy when using generative AI: what not to paste into a prompt', 'Criterios para usar asistentes de IA con documentos, datos personales, memoria, historial y controles.', 'Criteria for using AI assistants with documents, personal data, memory, history and controls.', 'Imagen real/conceptual relacionada con inteligencia artificial y datos.', 'Real/conceptual image related to artificial intelligence and data.', false],
 ] as const;
 
 const readingTime = (body: ArticleBodyBase) =>

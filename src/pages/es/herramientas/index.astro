@@ -15,6 +15,9 @@ const t = ui[lang];
       <div class="tool-card"><h2>Lectura estimada</h2><textarea data-read-text rows="5" placeholder="Pega un texto"></textarea><p data-read-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Lista para proteger Windows</h2><ul><li><label><input type="checkbox" /> Actualizaciones activas</label></li><li><label><input type="checkbox" /> Copia de seguridad probada</label></li><li><label><input type="checkbox" /> Bloqueo de pantalla</label></li><li><label><input type="checkbox" /> Defender sin alertas críticas</label></li></ul></div>
       <div class="tool-card"><h2>Lista anti-phishing</h2><ul><li><label><input type="checkbox" /> Revisar remitente</label></li><li><label><input type="checkbox" /> Comprobar dominio</label></li><li><label><input type="checkbox" /> Evitar adjuntos inesperados</label></li><li><label><input type="checkbox" /> Confirmar solicitudes urgentes por otro canal</label></li></ul></div>
+      <div class="tool-card"><h2>Revisor de enlaces y QR</h2><input data-url-check type="url" placeholder="Pega la URL que muestra el QR" /><p data-url-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Auditor de enlaces en la nube</h2><ul data-cloud-audit><li><label><input type="checkbox" /> Cualquiera con el enlace puede acceder</label></li><li><label><input type="checkbox" /> Tiene permiso de edición</label></li><li><label><input type="checkbox" /> Hay usuarios externos</label></li><li><label><input type="checkbox" /> El enlace tiene más de 30 días</label></li></ul><p data-cloud-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Permisos de extensiones</h2><ul data-extension-audit><li><label><input type="checkbox" /> Leer y cambiar datos en todos los sitios</label></li><li><label><input type="checkbox" /> Acceso al historial</label></li><li><label><input type="checkbox" /> Acceso a descargas</label></li><li><label><input type="checkbox" /> Acceso al portapapeles</label></li></ul><p data-extension-result>{t.estimate}</p></div>
     </div>
   </div></section>
   <script>
@@ -44,5 +47,24 @@ const t = ui[lang];
       const words = event.target.value.trim().split(/\s+/).filter(Boolean).length;
       document.querySelector('[data-read-result]').textContent = `${Math.max(1, Math.ceil(words / 220))} min de lectura aproximada.`;
     });
+    document.querySelector('[data-url-check]')?.addEventListener('input', (event) => {
+      const value = event.target.value.trim();
+      let message = 'Pega una URL para revisar señales básicas.';
+      try {
+        const url = new URL(value);
+        const host = url.hostname.replace(/^www\./, '');
+        const risky = ['bit.ly', 'tinyurl.com', 't.co', 'is.gd'].includes(host) || host.split('.').length > 3 || !url.protocol.startsWith('https');
+        message = risky ? `Revisión prudente: ${host}. Evita iniciar sesión o pagar sin confirmar por canal oficial.` : `Señales básicas correctas: ${host}. Revisa igualmente contexto y destinatario.`;
+      } catch {}
+      document.querySelector('[data-url-result]').textContent = message;
+    });
+    const scoreChecks = (selector, output, labels) => {
+      document.querySelector(selector)?.addEventListener('change', () => {
+        const checked = document.querySelectorAll(`${selector} input:checked`).length;
+        document.querySelector(output).textContent = checked >= 3 ? labels.high : checked >= 1 ? labels.medium : labels.low;
+      });
+    };
+    scoreChecks('[data-cloud-audit]', '[data-cloud-result]', { low: 'Riesgo bajo orientativo: revisa destinatarios igualmente.', medium: 'Riesgo medio: limita enlace, permiso o usuarios externos.', high: 'Riesgo alto: conviene retirar enlace y compartir con personas concretas.' });
+    scoreChecks('[data-extension-audit]', '[data-extension-result]', { low: 'Riesgo bajo orientativo: mantén solo extensiones necesarias.', medium: 'Riesgo medio: revisa si el permiso encaja con la función.', high: 'Riesgo alto: considera desinstalar o limitar acceso a sitios concretos.' });
   </script>
 </DigiLayout>

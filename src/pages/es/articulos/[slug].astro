@@ -25,6 +25,7 @@ const topic = topics[article.topic][lang];
       <img src={withBase(article.image)} alt={article.alt} loading="eager" width="1200" height="630" />
       <div class="notice sage"><h2>{t.quick}</h2><ul>{article.body.quick.map((item) => <li>{item}</li>)}</ul></div>
       {article.body.sections.map(([heading, paragraphs]) => <section><h2 id={heading.toLowerCase().replaceAll(' ', '-')}>{heading}</h2>{paragraphs.map((p) => <p>{p}</p>)}</section>)}
+      {article.body.media && <div class="article-media-grid">{article.body.media.map((item) => <figure><img src={withBase(item.src)} alt={item.alt} loading="lazy" /><figcaption>{item.caption}</figcaption></figure>)}</div>}
       <section><h2>{t.steps}</h2><ol>{article.body.steps.map((step) => <li>{step}</li>)}</ol></section>
       <section class="notice mustard"><h2>{t.tips}</h2><ul>{article.body.tips.map((tip) => <li>{tip}</li>)}</ul></section>
       <section class="notice"><h2>{t.warnings}</h2><ul>{article.body.warnings.map((warning) => <li>{warning}</li>)}</ul></section>

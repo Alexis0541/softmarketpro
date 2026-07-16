@@ -174,5 +174,45 @@
         "license":  "Unsplash License",
         "source":  "https://unsplash.com/photos/person-in-gray-long-sleeve-shirt-using-macbook-air-on-brown-wooden-table-ngWKDQhM88Q",
         "notes":  "Downloaded locally from Unsplash for the local versus cloud backup article."
+    },
+    {
+        "creator":  "Marielle Ursua",
+        "source":  "https://unsplash.com/photos/a-person-using-a-laptop-computer-with-a-qr-code-on-the-screen-v9bLIYP20xw",
+        "license":  "Unsplash License",
+        "notes":  "Downloaded locally from Unsplash for the QR phishing article.",
+        "title":  "quishing-codigos-qr",
+        "file":  "/assets/images/articles/quishing-codigos-qr.jpg"
+    },
+    {
+        "creator":  "Unknown Wikimedia Commons contributor",
+        "source":  "https://commons.wikimedia.org/wiki/File:Wireless_network.jpg",
+        "license":  "Wikimedia Commons free license",
+        "notes":  "Downloaded locally from Wikimedia Commons for the smart home privacy article.",
+        "title":  "hogar-inteligente-privacidad",
+        "file":  "/assets/images/articles/hogar-inteligente-privacidad.jpg"
+    },
+    {
+        "creator":  "Wikimedia Commons contributor",
+        "source":  "https://commons.wikimedia.org/wiki/File:100DaysOfCode_(Unsplash).jpg",
+        "license":  "Wikimedia Commons free license",
+        "notes":  "Downloaded locally from Wikimedia Commons for the browser extension permissions article.",
+        "title":  "permisos-extension-navegador",
+        "file":  "/assets/images/articles/permisos-extension-navegador.jpg"
+    },
+    {
+        "creator":  "Samsung Memory US",
+        "source":  "https://unsplash.com/photos/external-hard-drive-connected-to-a-laptop-MBVBzp8WH4E",
+        "license":  "Unsplash License",
+        "notes":  "Downloaded locally from Unsplash for the cloud sharing article.",
+        "title":  "compartir-archivos-nube",
+        "file":  "/assets/images/articles/compartir-archivos-nube.jpg"
+    },
+    {
+        "creator":  "Mike MacKenzie",
+        "source":  "https://commons.wikimedia.org/wiki/File:AI_Artificial_Intelligence_concept_(52917075159).jpg",
+        "license":  "Creative Commons Attribution 2.0",
+        "notes":  "Downloaded locally from Wikimedia Commons for the generative AI privacy article.",
+        "title":  "privacidad-ia-generativa",
+        "file":  "/assets/images/articles/privacidad-ia-generativa.jpg"
     }
 ]

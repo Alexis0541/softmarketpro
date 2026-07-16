@@ -15,6 +15,9 @@ const t = ui[lang];
       <div class="tool-card"><h2>Reading time</h2><textarea data-read-text rows="5" placeholder="Paste text"></textarea><p data-read-result>{t.estimate}</p></div>
       <div class="tool-card"><h2>Windows protection checklist</h2><ul><li><label><input type="checkbox" /> Updates enabled</label></li><li><label><input type="checkbox" /> Backup tested</label></li><li><label><input type="checkbox" /> Screen lock enabled</label></li><li><label><input type="checkbox" /> Defender has no critical alerts</label></li></ul></div>
       <div class="tool-card"><h2>Phishing checklist</h2><ul><li><label><input type="checkbox" /> Review sender</label></li><li><label><input type="checkbox" /> Check domain</label></li><li><label><input type="checkbox" /> Avoid unexpected attachments</label></li><li><label><input type="checkbox" /> Confirm urgent requests through another channel</label></li></ul></div>
+      <div class="tool-card"><h2>Link and QR reviewer</h2><input data-url-check type="url" placeholder="Paste the URL shown by the QR code" /><p data-url-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Cloud link auditor</h2><ul data-cloud-audit><li><label><input type="checkbox" /> Anyone with the link can access</label></li><li><label><input type="checkbox" /> Edit permission is enabled</label></li><li><label><input type="checkbox" /> External users are present</label></li><li><label><input type="checkbox" /> Link is older than 30 days</label></li></ul><p data-cloud-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Extension permissions</h2><ul data-extension-audit><li><label><input type="checkbox" /> Read and change data on all sites</label></li><li><label><input type="checkbox" /> History access</label></li><li><label><input type="checkbox" /> Downloads access</label></li><li><label><input type="checkbox" /> Clipboard access</label></li></ul><p data-extension-result>{t.estimate}</p></div>
     </div>
   </div></section>
   <script>
@@ -44,5 +47,24 @@ const t = ui[lang];
       const words = event.target.value.trim().split(/\s+/).filter(Boolean).length;
       document.querySelector('[data-read-result]').textContent = `${Math.max(1, Math.ceil(words / 220))} min estimated reading time.`;
     });
+    document.querySelector('[data-url-check]')?.addEventListener('input', (event) => {
+      const value = event.target.value.trim();
+      let message = 'Paste a URL to review basic signals.';
+      try {
+        const url = new URL(value);
+        const host = url.hostname.replace(/^www\./, '');
+        const risky = ['bit.ly', 'tinyurl.com', 't.co', 'is.gd'].includes(host) || host.split('.').length > 3 || !url.protocol.startsWith('https');
+        message = risky ? `Cautious review: ${host}. Avoid signing in or paying without official confirmation.` : `Basic signals look reasonable: ${host}. Still review context and recipient.`;
+      } catch {}
+      document.querySelector('[data-url-result]').textContent = message;
+    });
+    const scoreChecks = (selector, output, labels) => {
+      document.querySelector(selector)?.addEventListener('change', () => {
+        const checked = document.querySelectorAll(`${selector} input:checked`).length;
+        document.querySelector(output).textContent = checked >= 3 ? labels.high : checked >= 1 ? labels.medium : labels.low;
+      });
+    };
+    scoreChecks('[data-cloud-audit]', '[data-cloud-result]', { low: 'Low educational risk: still review recipients.', medium: 'Medium risk: limit link, permission or external users.', high: 'High risk: consider removing the link and sharing with named people.' });
+    scoreChecks('[data-extension-audit]', '[data-extension-result]', { low: 'Low educational risk: keep only necessary extensions.', medium: 'Medium risk: check whether permission matches the feature.', high: 'High risk: consider uninstalling or limiting site access.' });
   </script>
 </DigiLayout>
