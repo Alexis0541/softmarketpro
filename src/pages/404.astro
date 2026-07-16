@@ -1,35 +1,12 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import { getLangFromUrl, localizePath } from '~/utils/i18n';
-import { getPermalink } from '~/utils/permalinks';
-
-const title = `Error 404`;
-const lang = getLangFromUrl(Astro.url);
-const copy = lang === 'en'
-  ? {
-      message: "Sorry, we couldn't find this page.",
-      text: 'Do not worry, you can continue browsing the software store from the homepage.',
-      button: 'Back to homepage',
-    }
-  : {
-      message: 'Lo sentimos, no encontramos esta pagina.',
-      text: 'No te preocupes, puedes seguir navegando por la tienda de software desde el inicio.',
-      button: 'Volver al inicio',
-    };
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { withBase } from '~/utils/paths';
 ---
-
-<Layout metadata={{ title }} lang={lang}>
-  <section class="flex items-center h-full p-16">
-    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 font-bold text-9xl">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">{copy.message}</p>
-        <p class="mt-4 mb-8 text-lg text-muted dark:text-slate-400">{copy.text}</p>
-        <a rel="noopener noreferrer" href={getPermalink(localizePath('/', lang))} class="btn ml-4">{copy.button}</a>
-      </div>
-    </div>
-  </section>
-</Layout>
+<DigiLayout lang="es" title="Pagina no encontrada" description="La pagina solicitada no existe en DigiClara." noindex={true}>
+  <section class="section"><div class="page-shell article-body">
+    <p class="eyebrow">404</p>
+    <h1>Pagina no encontrada</h1>
+    <p>Puede que el contenido haya cambiado de ruta durante la transformacion editorial de DigiClara.</p>
+    <div class="button-row"><a class="button primary" href={withBase('/es/')}>Ir al inicio</a><a class="button" href={withBase('/en/')}>English home</a></div>
+  </div></section>
+</DigiLayout>

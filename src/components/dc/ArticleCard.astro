@@ -1,0 +1,24 @@
+---
+import { topics, ui, articlePath, type Lang } from '~/data/digiclara';
+import { withBase } from '~/utils/paths';
+
+interface Props {
+  article: any;
+  lang: Lang;
+}
+const { article, lang } = Astro.props;
+const topic = topics[article.topic][lang];
+const t = ui[lang];
+---
+
+<article class="article-card">
+  <a href={withBase(articlePath(lang, article.slug))} class="media-link">
+    <img src={withBase(article.image)} alt={article.alt} loading="lazy" width="640" height="360" />
+  </a>
+  <div>
+    <p class="eyebrow">{topic.name}</p>
+    <h3><a href={withBase(articlePath(lang, article.slug))}>{article.title}</a></h3>
+    <p>{article.summary}</p>
+    <div class="meta">{article.author} - {article.readingTime} {t.minutes}</div>
+  </div>
+</article>

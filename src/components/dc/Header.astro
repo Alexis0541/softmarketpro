@@ -1,0 +1,41 @@
+---
+import Logo from './Logo.astro';
+import { navItems, ui, type Lang } from '~/data/digiclara';
+import { alternatePath, withBase } from '~/utils/paths';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+const items = navItems(lang);
+---
+
+<a class="skip-link" href="#contenido">{t.skip}</a>
+<header class="site-header">
+  <div class="topline">
+    <a href={withBase(`/${lang}/`)} class="brand"><Logo /></a>
+    <form class="search-form" action={withBase(`/${lang}/${lang === 'es' ? 'buscar' : 'search'}/`)}>
+      <label class="sr-only" for="site-search">{t.search}</label>
+      <input id="site-search" name="q" type="search" placeholder={t.searchPlaceholder} />
+    </form>
+    <nav class="language-switch" aria-label={t.language}>
+      <a href={alternatePath(Astro.url.pathname, 'es')} aria-current={lang === 'es' ? 'page' : undefined}>ES</a>
+      <a href={alternatePath(Astro.url.pathname, 'en')} aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+    </nav>
+    <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="main-menu">{t.menu}</button>
+  </div>
+  <nav id="main-menu" class="main-menu" data-main-menu>
+    {items.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
+  </nav>
+</header>
+
+<script>
+  const button = document.querySelector('[data-menu-button]');
+  const menu = document.querySelector('[data-main-menu]');
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    menu?.toggleAttribute('data-open', !open);
+  });
+</script>

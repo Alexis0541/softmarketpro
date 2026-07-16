@@ -1,0 +1,34 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { ui } from '~/data/digiclara';
+const lang = 'es';
+const t = ui[lang];
+---
+
+<DigiLayout lang={lang} title="Herramientas gratuitas" description="Herramientas locales de seguridad y productividad digital.">
+  <section class="section"><div class="page-shell">
+    <header class="section-header"><p class="eyebrow">Herramientas</p><h1>Utilidades que funcionan en tu navegador</h1><p>No enviamos contraseñas ni datos sensibles a servidores.</p></header>
+    <div class="grid grid-3">
+      <div class="tool-card"><h2>Generador de contraseñas</h2><button class="button primary" data-generate>Generar</button><input data-password readonly aria-label="Contrasena generada" /></div>
+      <div class="tool-card"><h2>Fortaleza educativa</h2><input data-strength type="text" placeholder="Escribe una contrasena de prueba" /><p data-strength-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Lectura estimada</h2><textarea data-read-text rows="5" placeholder="Pega un texto"></textarea><p data-read-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Lista para proteger Windows</h2><ul><li><label><input type="checkbox" /> Actualizaciones activas</label></li><li><label><input type="checkbox" /> Copia de seguridad</label></li><li><label><input type="checkbox" /> Bloqueo de pantalla</label></li></ul></div>
+      <div class="tool-card"><h2>Lista anti-phishing</h2><ul><li><label><input type="checkbox" /> Revisar remitente</label></li><li><label><input type="checkbox" /> No abrir adjuntos inesperados</label></li><li><label><input type="checkbox" /> Comprobar dominio</label></li></ul></div>
+    </div>
+  </div></section>
+  <script>
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!#%+?';
+    document.querySelector('[data-generate]')?.addEventListener('click', () => {
+      document.querySelector('[data-password]').value = Array.from({ length: 18 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    });
+    document.querySelector('[data-strength]')?.addEventListener('input', (event) => {
+      const v = event.target.value;
+      const score = [v.length >= 12, /[A-Z]/.test(v), /[a-z]/.test(v), /\d/.test(v), /[^A-Za-z0-9]/.test(v)].filter(Boolean).length;
+      document.querySelector('[data-strength-result]').textContent = score >= 4 ? 'Fortaleza orientativa alta.' : score >= 3 ? 'Fortaleza orientativa media.' : 'Fortaleza orientativa baja.';
+    });
+    document.querySelector('[data-read-text]')?.addEventListener('input', (event) => {
+      const words = event.target.value.trim().split(/\s+/).filter(Boolean).length;
+      document.querySelector('[data-read-result]').textContent = `${Math.max(1, Math.ceil(words / 220))} min de lectura aproximada.`;
+    });
+  </script>
+</DigiLayout>

@@ -1,0 +1,21 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import ArticleCard from '~/components/dc/ArticleCard.astro';
+import { getTopicArticles, getTopicBySlug, topics } from '~/data/digiclara';
+
+export function getStaticPaths() {
+  return Object.values(topics).map((topic) => ({ params: { topic: topic.en.slug } }));
+}
+const lang = 'en';
+const key = getTopicBySlug(lang, Astro.params.topic || '');
+if (!key) return Astro.redirect('/en/');
+const topic = topics[key][lang];
+const articles = getTopicArticles(lang, key);
+---
+
+<DigiLayout lang={lang} title={topic.name} description={topic.summary}>
+  <section class="section"><div class="page-shell">
+    <header class="section-header"><p class="eyebrow">Category</p><h1>{topic.name}</h1><p class="lead">{topic.summary}</p></header>
+    <div class="grid grid-3">{articles.map((article) => <ArticleCard article={article} lang={lang} />)}</div>
+  </div></section>
+</DigiLayout>

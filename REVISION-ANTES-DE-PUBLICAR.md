@@ -1,0 +1,32 @@
+# Revision antes de publicar DigiClara
+
+- [ ] Configurar dominio definitivo.
+- [ ] Configurar correo editorial.
+- [ ] Revisar datos legales.
+- [ ] Revisar traducciones ES.
+- [ ] Revisar traducciones EN.
+- [ ] Revisar privacidad.
+- [ ] Revisar cookies.
+- [ ] Revisar terminos.
+- [ ] Revisar formularios y activar backend solo si procede.
+- [ ] Revisar fechas.
+- [ ] Revisar autoria institucional.
+- [ ] Confirmar ausencia de datos inventados.
+- [ ] Confirmar ausencia de tienda.
+- [ ] Confirmar ausencia de marcas VPN promocionales no autorizadas.
+- [ ] Confirmar ausencia de enlaces afiliados.
+- [ ] Confirmar ausencia de azul oscuro predominante.
+- [ ] Revisar logo.
+- [ ] Revisar favicon.
+- [ ] Revisar Open Graph.
+- [ ] Revisar sitemap.
+- [ ] Revisar robots.
+- [ ] Revisar hreflang.
+- [ ] Revisar canonical.
+- [ ] Revisar enlaces.
+- [ ] Revisar movil.
+- [ ] Revisar accesibilidad.
+- [ ] Revisar rendimiento.
+- [ ] Revisar 404.
+- [ ] Revisar ortografia ES.
+- [ ] Revisar ortografia EN.

@@ -1,0 +1,28 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { getArticles, ui } from '~/data/digiclara';
+import { withBase } from '~/utils/paths';
+const lang = 'en';
+const articles = getArticles(lang);
+const t = ui[lang];
+const articleBase = withBase('/en/articles/');
+---
+
+<DigiLayout lang={lang} title="Search" description="DigiClara editorial search.">
+  <section class="section"><div class="page-shell">
+    <h1>Search DigiClara</h1>
+    <input data-search-box type="search" placeholder={t.searchPlaceholder} />
+    <div data-search-results class="grid grid-3" style="margin-top:1.5rem"></div>
+  </div></section>
+  <script define:vars={{ articles, noResults: t.noResults, articleBase }}>
+    const input = document.querySelector('[data-search-box]');
+    const results = document.querySelector('[data-search-results]');
+    const render = () => {
+      const q = input.value.trim().toLowerCase();
+      const found = articles.filter((a) => [a.title, a.summary, a.topic, ...(a.tags || [])].join(' ').toLowerCase().includes(q));
+      results.innerHTML = (q ? found : articles).map((a) => `<article class="card"><p class="eyebrow">${a.topic}</p><h2><a href="${articleBase}${a.slug}/">${a.title}</a></h2><p>${a.summary}</p></article>`).join('') || `<p>${noResults}</p>`;
+    };
+    input.addEventListener('input', render);
+    render();
+  </script>
+</DigiLayout>

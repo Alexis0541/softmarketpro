@@ -1,4 +1,4 @@
-declare module 'storefront:config' {
+declare module 'digiclara:config' {
   import type { SiteConfig, I18NConfig, MetaDataConfig, AppBlogConfig, UIConfig, AnalyticsConfig } from './config';
 
   export const SITE: SiteConfig;

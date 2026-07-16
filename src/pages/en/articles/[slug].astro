@@ -1,0 +1,45 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import ArticleCard from '~/components/dc/ArticleCard.astro';
+import { articlePath, getArticle, getArticles, topics, ui } from '~/data/digiclara';
+import { withBase } from '~/utils/paths';
+
+export function getStaticPaths() {
+  return getArticles('en').map((article) => ({ params: { slug: article.slug } }));
+}
+const lang = 'en';
+const article = getArticle(lang, Astro.params.slug || '');
+if (!article) return Astro.redirect('/en/');
+const t = ui[lang];
+const related = getArticles(lang).filter((item) => item.slug !== article.slug && item.topic === article.topic).slice(0, 3);
+const topic = topics[article.topic][lang];
+---
+
+<DigiLayout lang={lang} title={article.title} description={article.summary} image={article.image} type="article">
+  <article class="article-layout">
+    <div class="article-body">
+      <p class="eyebrow"><a href={withBase(`/en/${topic.slug}/`)}>{topic.name}</a></p>
+      <h1>{article.title}</h1>
+      <p class="lead">{article.summary}</p>
+      <p class="meta">{article.author} - {t.published}: {article.published} - {t.updated}: {article.updated} - {article.readingTime} {t.minutes}</p>
+      <img src={withBase(article.image)} alt={article.alt} loading="eager" width="1200" height="630" />
+      <div class="notice sage"><h2>{t.quick}</h2><ul>{article.body.quick.map((item) => <li>{item}</li>)}</ul></div>
+      {article.body.sections.map((section) => <section><h2 id={section.heading.toLowerCase().replaceAll(' ', '-')}>{section.heading}</h2>{section.paragraphs.map((p) => <p>{p}</p>)}</section>)}
+      <section><h2>{t.steps}</h2><ol>{article.body.steps.map((step) => <li>{step}</li>)}</ol></section>
+      <section class="notice mustard"><h2>{t.tips}</h2><ul>{article.body.tips.map((tip) => <li>{tip}</li>)}</ul></section>
+      <section class="notice"><h2>{t.warnings}</h2><ul>{article.body.warnings.map((warning) => <li>{warning}</li>)}</ul></section>
+      <section><h2>{t.faq}</h2>{article.body.faqs.map(([q, a]) => <div><h3>{q}</h3><p>{a}</p></div>)}</section>
+      <section><h2>Conclusion</h2><p>{article.body.conclusion}</p></section>
+      <section><h2>{t.sources}</h2><ul>{article.body.sources.map((source) => <li>{source}</li>)}</ul></section>
+      <div class="tag-list">{article.tags.map((tag) => <span>{tag}</span>)}</div>
+    </div>
+    <aside class="toc">
+      <h2>{t.toc}</h2>
+      <a href="#why-it-matters">Why it matters</a><br />
+      <a href="#recommended-steps">Recommended steps</a><br />
+      <a href="#limitations">Limitations</a>
+    </aside>
+  </article>
+  <section class="section"><div class="page-shell"><h2>{t.related}</h2><div class="grid grid-3">{related.map((item) => <ArticleCard article={item} lang={lang} />)}</div></div></section>
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: article.title, description: article.summary, author: { '@type': 'Organization', name: article.author }, datePublished: article.published, dateModified: article.updated, inLanguage: 'en', url: withBase(articlePath(lang, article.slug)) })} />
+</DigiLayout>

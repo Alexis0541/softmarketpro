@@ -1,6 +1,6 @@
 import slugify from 'limax';
 
-import { SITE, APP_BLOG } from 'storefront:config';
+import { SITE, APP_BLOG } from 'digiclara:config';
 
 import { trim } from '~/utils/utils';
 

@@ -34,7 +34,7 @@ jobs:
           const repo = process.env.GITHUB_REPOSITORY || '';
           const [owner, name] = repo.split('/');
           const base = owner && name && name !== `${owner}.github.io` ? `/${name}/` : '/';
-          const site = owner ? `https://${owner}.github.io` : 'https://softmarketpro.example';
+          const site = owner ? `https://${owner}.github.io` : 'https://digiclara.example';
           const file = 'src/config.yaml';
           let yaml = fs.readFileSync(file, 'utf8');
           yaml = yaml.replace(/site:\n  name: ([^\n]+)\n  site: '[^']+'\n  base: '[^']+'/m, `site:\n  name: $1\n  site: '${site}'\n  base: '${base}'`);

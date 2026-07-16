@@ -8,7 +8,7 @@ import loadConfig from './utils/loadConfig';
 export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegration => {
   let cfg: AstroConfig;
   return {
-    name: 'storefront-config-integration',
+    name: 'digiclara-config-integration',
 
     hooks: {
       'astro:config:setup': async ({
@@ -20,9 +20,9 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
         updateConfig,
         addWatchFile,
       }) => {
-        const buildLogger = logger.fork('storefront');
+        const buildLogger = logger.fork('digiclara');
 
-        const virtualModuleId = 'storefront:config';
+        const virtualModuleId = 'digiclara:config';
         const resolvedVirtualModuleId = '\0' + virtualModuleId;
 
         const rawJsonConfig = (await loadConfig(_themeConfig)) as Config;
@@ -37,7 +37,7 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
           vite: {
             plugins: [
               {
-                name: 'vite-plugin-storefront-config',
+                name: 'vite-plugin-digiclara-config',
                 resolveId(id) {
                   if (id === virtualModuleId) {
                     return resolvedVirtualModuleId;
@@ -63,9 +63,9 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
         if (typeof _themeConfig === 'string') {
           addWatchFile(new URL(_themeConfig, config.root));
 
-          buildLogger.info(`Storefront \`${_themeConfig}\` has been loaded.`);
+          buildLogger.info(`DigiClara \`${_themeConfig}\` has been loaded.`);
         } else {
-          buildLogger.info(`Storefront config has been loaded.`);
+          buildLogger.info(`DigiClara config has been loaded.`);
         }
       },
       'astro:config:done': async ({ config }) => {
@@ -73,7 +73,7 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
       },
 
       'astro:build:done': async ({ logger }) => {
-        const buildLogger = logger.fork('storefront');
+        const buildLogger = logger.fork('digiclara');
         buildLogger.info('Updating `robots.txt` with `sitemap-index.xml` ...');
 
         try {

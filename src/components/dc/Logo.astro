@@ -1,0 +1,16 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<span class="dc-logo" aria-label="DigiClara">
+  <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
+    <rect x="5" y="6" width="38" height="36" rx="11" fill="#FFFDF8" stroke="#C7613F" stroke-width="3" />
+    <path d="M16 16h10c6 0 10 4 10 8s-4 8-10 8H16V16Z" fill="#F7F3EA" stroke="#242421" stroke-width="3" />
+    <path d="M24 16v16M31 18l5-5M36 13l1 7" stroke="#71806A" stroke-width="3" stroke-linecap="round" />
+    <circle cx="34" cy="15" r="3" fill="#D5A63A" />
+  </svg>
+  {!compact && <strong>DigiClara</strong>}
+</span>

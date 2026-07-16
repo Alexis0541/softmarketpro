@@ -4,22 +4,22 @@ import ArticleCard from '~/components/dc/ArticleCard.astro';
 import { getArticles, site, topics, ui } from '~/data/digiclara';
 import { withBase } from '~/utils/paths';
 
-const lang = 'en';
+const lang = 'es';
 const t = ui[lang];
 const articles = getArticles(lang);
 const featured = articles[0];
 ---
 
-<DigiLayout lang={lang} title="Home" description={site.descriptions[lang]}>
+<DigiLayout lang={lang} title="Inicio" description={site.descriptions[lang]}>
   <section class="hero">
     <div class="hero-grid">
       <div>
         <p class="eyebrow">DigiClara</p>
         <h1>{site.slogans[lang]}</h1>
-        <p class="lead">Practical guides, independent analysis, and resources to protect your devices, improve your privacy, and choose digital tools with confidence.</p>
+        <p class="lead">Guias practicas, analisis independientes y recursos para proteger tus dispositivos, mejorar tu privacidad y elegir herramientas digitales con confianza.</p>
         <div class="button-row">
-          <a class="button primary" href={withBase('/en/guides/')}>Explore guides</a>
-          <a class="button" href={withBase('/en/comparisons/')}>View comparisons</a>
+          <a class="button primary" href={withBase('/es/guias/')}>Explorar guias</a>
+          <a class="button" href={withBase('/es/comparativas/')}>Ver comparativas</a>
         </div>
       </div>
       <div class="editorial-window"><div class="window-card"><img src={withBase('/assets/digiclara-logo.svg')} alt="DigiClara" /></div></div>
@@ -32,8 +32,8 @@ const featured = articles[0];
   </div></section>
 
   <section class="section"><div class="page-shell">
-    <header class="section-header"><p class="eyebrow">Categories</p><h2>Main topics</h2></header>
-    <div class="grid grid-4">{Object.values(topics).slice(0, 8).map((topic) => <a class="card" href={withBase(`/en/${topic.en.slug}/`)}><h3>{topic.en.name}</h3><p>{topic.en.summary}</p></a>)}</div>
+    <header class="section-header"><p class="eyebrow">Categorias</p><h2>Temas principales</h2></header>
+    <div class="grid grid-4">{Object.values(topics).slice(0, 8).map((topic) => <a class="card" href={withBase(`/es/${topic.es.slug}/`)}><h3>{topic.es.name}</h3><p>{topic.es.summary}</p></a>)}</div>
   </div></section>
 
   {[
@@ -47,11 +47,11 @@ const featured = articles[0];
   ))}
 
   <section class="section"><div class="page-shell">
-    <header class="section-header"><p class="eyebrow">{t.methodology}</p><h2>Transparency before promises</h2><p>We separate educational guides, documentary comparisons and practical tests. When we did not test something directly, we say so.</p></header>
+    <header class="section-header"><p class="eyebrow">{t.methodology}</p><h2>Transparencia antes que promesas</h2><p>Diferenciamos guias educativas, comparativas documentales y pruebas practicas. Cuando no probamos algo directamente, lo indicamos.</p></header>
     <div class="grid grid-3">
-      <div class="notice sage"><h3>Educational guides</h3><p>They explain concepts and steps without claiming measured results.</p></div>
-      <div class="notice mustard"><h3>Documentary comparisons</h3><p>They compare public criteria and verifiable limitations.</p></div>
-      <div class="notice"><h3>Practical tests</h3><p>They are declared only when they have actually been performed.</p></div>
+      <div class="notice sage"><h3>Guias educativas</h3><p>Explican conceptos y pasos sin afirmar resultados medidos.</p></div>
+      <div class="notice mustard"><h3>Comparativas documentales</h3><p>Comparan criterios publicos y limitaciones verificables.</p></div>
+      <div class="notice"><h3>Pruebas practicas</h3><p>Solo se declaran cuando realmente se han realizado.</p></div>
     </div>
   </div></section>
 

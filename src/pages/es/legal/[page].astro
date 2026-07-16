@@ -1,0 +1,15 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { legalPages } from '~/data/digiclara';
+export function getStaticPaths() { return Object.values(legalPages).map((p) => ({ params: { page: p.es[0] } })); }
+const page = Object.values(legalPages).find((p) => p.es[0] === Astro.params.page)?.es;
+if (!page) return Astro.redirect('/es/');
+---
+<DigiLayout lang="es" title={page[1]} description={page[2]}>
+  <section class="section"><div class="page-shell article-body">
+    <h1>{page[1]}</h1><p>{page[2]}</p>
+    <h2>Alcance</h2><p>Esta pagina describe el funcionamiento editorial actual de DigiClara. No sustituye asesoramiento legal profesional.</p>
+    <h2>Datos pendientes</h2><p>Antes de publicar una version comercial, se debe completar correo de contacto, responsable legal y cualquier requisito local aplicable.</p>
+    <h2>Compromiso</h2><p>No se usan promociones ocultas, no se afirman pruebas no realizadas y no se recopilan datos sensibles desde herramientas locales.</p>
+  </div></section>
+</DigiLayout>

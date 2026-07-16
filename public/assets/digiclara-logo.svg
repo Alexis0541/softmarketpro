@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" role="img" aria-labelledby="title">
+  <title id="title">DigiClara logo</title>
+  <rect width="520" height="140" rx="28" fill="#FFFDF8"/>
+  <g transform="translate(24 22)">
+    <rect width="96" height="96" rx="24" fill="#F7F3EA" stroke="#C7613F" stroke-width="7"/>
+    <path d="M30 31h24c17 0 28 10 28 18s-11 18-28 18H30V31Z" fill="#FFFDF8" stroke="#242421" stroke-width="7"/>
+    <path d="M50 31v36M72 30l13-13M86 17l3 16" stroke="#71806A" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="82" cy="22" r="7" fill="#D5A63A"/>
+  </g>
+  <text x="142" y="74" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="850" fill="#242421">DigiClara</text>
+  <text x="145" y="104" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#71806A">tecnologia clara y practica</text>
+</svg>

@@ -1,0 +1,34 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { ui } from '~/data/digiclara';
+const lang = 'en';
+const t = ui[lang];
+---
+
+<DigiLayout lang={lang} title="Free tools" description="Local security and digital productivity tools.">
+  <section class="section"><div class="page-shell">
+    <header class="section-header"><p class="eyebrow">Tools</p><h1>Utilities that run in your browser</h1><p>We do not send passwords or sensitive data to servers.</p></header>
+    <div class="grid grid-3">
+      <div class="tool-card"><h2>Password generator</h2><button class="button primary" data-generate>Generate</button><input data-password readonly aria-label="Generated password" /></div>
+      <div class="tool-card"><h2>Educational strength check</h2><input data-strength type="text" placeholder="Type a test password" /><p data-strength-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Reading time</h2><textarea data-read-text rows="5" placeholder="Paste text"></textarea><p data-read-result>{t.estimate}</p></div>
+      <div class="tool-card"><h2>Windows protection checklist</h2><ul><li><label><input type="checkbox" /> Updates enabled</label></li><li><label><input type="checkbox" /> Backup configured</label></li><li><label><input type="checkbox" /> Screen lock enabled</label></li></ul></div>
+      <div class="tool-card"><h2>Phishing checklist</h2><ul><li><label><input type="checkbox" /> Review sender</label></li><li><label><input type="checkbox" /> Avoid unexpected attachments</label></li><li><label><input type="checkbox" /> Check domain</label></li></ul></div>
+    </div>
+  </div></section>
+  <script>
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!#%+?';
+    document.querySelector('[data-generate]')?.addEventListener('click', () => {
+      document.querySelector('[data-password]').value = Array.from({ length: 18 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    });
+    document.querySelector('[data-strength]')?.addEventListener('input', (event) => {
+      const v = event.target.value;
+      const score = [v.length >= 12, /[A-Z]/.test(v), /[a-z]/.test(v), /\d/.test(v), /[^A-Za-z0-9]/.test(v)].filter(Boolean).length;
+      document.querySelector('[data-strength-result]').textContent = score >= 4 ? 'High educational strength.' : score >= 3 ? 'Medium educational strength.' : 'Low educational strength.';
+    });
+    document.querySelector('[data-read-text]')?.addEventListener('input', (event) => {
+      const words = event.target.value.trim().split(/\s+/).filter(Boolean).length;
+      document.querySelector('[data-read-result]').textContent = `${Math.max(1, Math.ceil(words / 220))} min estimated reading time.`;
+    });
+  </script>
+</DigiLayout>

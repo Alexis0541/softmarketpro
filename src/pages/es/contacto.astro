@@ -1,0 +1,20 @@
+---
+import DigiLayout from '~/layouts/DigiLayout.astro';
+import { ui } from '~/data/digiclara';
+const t = ui.es;
+---
+<DigiLayout lang="es" title="Contacto" description="Formulario editorial de contacto de DigiClara.">
+  <section class="section"><div class="page-shell article-body">
+    <h1>Contacto editorial</h1><p>{t.contactNote}</p>
+    <form data-contact-form>
+      <label>Nombre<input required name="nombre" /></label>
+      <label>Correo<input required type="email" name="email" /></label>
+      <label>Asunto<input required name="asunto" /></label>
+      <label>Tipo de consulta<select><option>Correccion de contenido</option><option>Sugerencia</option><option>Problema tecnico</option><option>Consulta editorial</option><option>Colaboracion</option><option>Otro</option></select></label>
+      <label>Mensaje<textarea required rows="6"></textarea></label>
+      <label><input required type="checkbox" /> Acepto que estos datos se usen para responder a mi consulta cuando el formulario este configurado.</label>
+      <button class="button primary" type="submit">Validar formulario</button>
+    </form>
+  </div></section>
+  <script>document.querySelector('[data-contact-form]')?.addEventListener('submit', (e) => { e.preventDefault(); alert('Formulario validado. No se envia informacion porque no hay backend configurado.'); });</script>
+</DigiLayout>
