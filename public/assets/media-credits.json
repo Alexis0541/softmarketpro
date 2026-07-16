@@ -238,5 +238,29 @@
         "notes":  "Downloaded locally from Unsplash for the stolen sessions recovery article.",
         "title":  "cerrar-sesiones-robadas",
         "file":  "/assets/images/articles/cerrar-sesiones-robadas.jpg"
+    },
+    {
+        "creator":  "Tony Webster",
+        "source":  "https://commons.wikimedia.org/wiki/File:U2F_Hardware_Authentication_Security_Keys_(Yubico_Yubikey_4_and_Feitian_MultiPass_FIDO)_(42286852310).jpg",
+        "license":  "Creative Commons Attribution 2.0",
+        "notes":  "Downloaded locally from Wikimedia Commons for the passkeys comparison article.",
+        "title":  "passkeys-vs-contrasenas",
+        "file":  "/assets/images/articles/passkeys-vs-contrasenas.jpg"
+    },
+    {
+        "creator":  "Wikimedia Commons contributor",
+        "source":  "https://commons.wikimedia.org/wiki/File:Different_Phones_(cropped).jpg",
+        "license":  "Wikimedia Commons free license",
+        "notes":  "Downloaded locally from Wikimedia Commons for the MFA fatigue article.",
+        "title":  "fatiga-mfa-push-bombing",
+        "file":  "/assets/images/articles/fatiga-mfa-push-bombing.jpg"
+    },
+    {
+        "creator":  "Tony Webster",
+        "source":  "https://commons.wikimedia.org/wiki/File:Google_Titan_Security_Key_-_Two_Factor_Authentication_(47400104011).jpg",
+        "license":  "Creative Commons Attribution 2.0",
+        "notes":  "Downloaded locally from Wikimedia Commons for the MFA methods comparison article.",
+        "title":  "comparar-metodos-mfa",
+        "file":  "/assets/images/articles/comparar-metodos-mfa.jpg"
     }
 ]
